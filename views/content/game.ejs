@@ -1,0 +1,56 @@
+<body class="black-jack-game">
+	<header>
+		<div class="game-status">
+			<span>Table:</span>
+			<span class="game-status-gametable"><%=tableNum%></span>
+			<span>Bets:<%=tableMinBet%>/<%=tableMaxBet%></span>
+			<span> Bank: </span>
+			<span class="game-status-gameBank">0</span>
+		</div>
+	</header>
+	<main>
+		<section class="game-field">
+			<section class="game-field-chairs">
+				<div class="place empty" id="player0">
+					<div class="place-player-name"></div>
+					<div class="chair"></div>
+				</div>
+				<div class="place empty" id="player1">
+					<div class="place-player-name"></div>
+					<div class="chair"></div>
+				</div>
+				<div class="place empty" id="player2">
+					<div class="place-player-name"></div>
+					<div class="chair"></div>
+				</div>
+				<div class="place empty" id="player3">
+					<div class="place-player-name"></div>
+					<div class="chair"></div>
+				</div>
+				<div class="place empty" id="player4">
+					<div class="place-player-name"></div>
+					<div class="chair"></div>
+				</div>
+			</section>
+			<section class="game-field-chips">
+			</section>
+			<section class="game-field-cards">
+				<div class="cards-player0"></div>
+				<div class="cards-player1"></div>
+				<div class="cards-player2"></div>
+				<div class="cards-player3"></div>
+				<div class="cards-player4"></div>
+			</section>
+			<section class="control-panel">
+				<input type="button" name="bet" class="control-panel-button-bet hide">
+				<input type="button" name="hit" class="control-panel-button-hit hide">
+				<input type="button" name="x2" class="control-panel-button-x2 hide">
+				<input type="button" name="stand" class="control-panel-button-stand hide">
+				<input type="button" name="split" class="control-panel-button-split hide">
+				<div class="control-panel-playerBank">
+					<span>1000</span>
+				</div>
+			</section>
+		</section>
+	</main>
+</body>

@@ -1,0 +1,744 @@
+body {
+	background-image: url(../img/main.jpg);
+	margin: 0px;
+}
+body.err404 p {
+	font-size: 2rem;font-weight: bold;color:#BC9678;
+}
+body.err404 h1 {
+	font-size: 4rem;font-weight: bold;color:#BC9678;
+}
+body.err404 section {
+	text-align: center;
+}
+body.err404 div {margin:0;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:7%;
+	width:100%;
+	text-align:center;
+}
+body.err404 img {
+	width: 14rem;
+	height: 4rem;
+	border:0px;
+}
+/*header menu*/
+.header-munu {
+	text-align:center;
+	background-color:rgba(192,192,192,0.4);
+}
+.header-munu ul {
+	margin: 0px;
+}
+.header-munu li {
+	display:inline-block;
+	margin-top:0.5rem;
+	margin-bottom:0.5rem;
+	margin-left:2rem;
+	margin-right:2rem;
+	font-size:1.3rem;
+	font-weight:bold;color:#FFF8DC;
+}
+.header-munu li:hover {
+	color:#F0F8FF;
+}
+.header-munu .user-name {
+	color:#F5F5F5;
+}
+/*chat*/
+.control-panel-chat {
+	width:100%;
+	position:fixed;
+	left:0rem;
+	bottom:0rem;
+	padding:0rem;
+	border:0rem;
+	z-index:5
+}
+.control-panel-chat-hidePanel {
+	width: 100%;
+	height:1.5rem;
+	background:url(../img/ChatHide.jpg) no-repeat;
+	background-size:100% 100%;
+	border:0rem;
+	border-radius:0.8rem 0.8rem 0% 0%;
+	text-align:center;
+	font-size:0rem;
+	padding:0rem;
+	line-height:1.5rem;
+	-moz-user-select:none;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+.control-panel-chat-hidePanel span {
+	color:#FFF8DC;
+	display:block;
+	font-size:1.5rem;
+	padding:0rem;
+	margin:0rem;
+}
+.control-panel-chat-hidePanel span:hover {
+	cursor:pointer;
+	color:red;
+	border:0.1rem solid red;
+	border-radius:0.8rem 0.8rem 0% 0%;
+}
+.control-panel-chat-message {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height:12rem;
+	margin-left:0.1rem;
+	margin-top:0.2rem;
+	display:inline-block;
+	width:18.6rem;
+	/*	width:13rem;*/
+	background:rgba(150,150,150,0.5);  
+}
+.control-panel-chat-message-newpost {
+	color: black;
+	font-size: 1rem;
+	margin:0;
+	padding:0;
+	text-align: left;
+}
+.control-panel-chat-message-newpost span{
+	color: white;
+	font-size: 1rem;
+	margin:0;
+	padding:0;
+}
+.control-panel-chat-players {
+	height:12rem;
+	width:18%;
+	margin-top:0.2rem;
+	display:inline-block;
+	background:rgba(200,200,200,0.5);
+}
+.control-panel-chat-input {
+	width:80%;
+	background:rgba(50,50,50,0.5);
+}
+.control-panel-chat-input-text {
+	margin-top:0.2rem;
+	display:inline-block;
+	width:14rem;
+	height:1.3rem;
+	background:rgba(230,230,230,0.5);
+	font-size:1.05rem;
+}
+.control-panel-chat-input-send {
+	margin-top:0.15rem;
+	margin-bottom:0.15rem;
+	margin-left:0.15rem;
+	width:3.8rem;
+	height:1.5rem;
+	display:inline-block;
+	background:url(../img/ChatButtonSend.jpg) no-repeat;
+	background-size:100% 100%;
+}
+.control-panel-chat-input-send:hover{
+	cursor:pointer;
+	color:red;
+	border:0.1rem solid red;
+}
+.control-panel-chat-main {
+	width:100%;
+	height:14.5rem;
+	background:url(../img/ChatMain.jpg) no-repeat;
+	background-size:100% 100%;
+}
+/*registration*/
+body.register form {
+	margin:0;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:7%;
+	width:100%;
+	text-align:center;
+}
+body.register input {
+	margin-top:0.3rem;
+	margin-bottom:1rem;
+	background-image:linear-gradient(#fcfcfc, #eee);
+	border:0.1rem solid #d5d5d5;
+	border-radius:0.3rem;
+	font-size: 1rem;
+	font-weight:bold;
+	text-align:center;
+	color:#5F5F5F;
+    -webkit-transition: background 1000ms linear;
+    -moz-transition: background 1000ms linear;
+    -o-transition: background 1000ms linear;
+    -ms-transition: background 1000ms linear;
+    transition: background 1000ms linear;
+}
+body.register input:hover {
+	background:#d5d5d5;
+	cursor:pointer;
+}
+body.register div {margin:0;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:7%;
+	width:100%;
+	text-align:center;
+}
+body.register img {
+	width:14rem;
+	height:4rem;
+	border:0px;
+}
+body.register span {
+	color: white;
+	font-size:1rem;
+	line-height:0.2rem;
+}
+body.register span+br+input.error  {
+	color:#8B0000;
+    background: #F08080;
+
+}
+body.register span+br+input.error:-moz-placeholder {
+	color: #8B0000;
+}
+body.register span+br+input.error::-webkit-input-placeholder {
+ 	color: #8B0000;
+}
+body.register .main-span {
+	font-size:2.5rem;
+	line-height:4rem;
+}
+body.register .form-button {
+	color:black;
+	margin-top:1rem;
+}
+body.register span.error  {
+	color:#8B0000;
+    -webkit-animation-name: example;
+    -webkit-animation-duration: 2s;
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+/*sign UP*/
+body.signup form {
+	margin:0;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:7%;
+	width:100%;
+	text-align:center;
+}
+body.signup input {
+	margin-top:0.3rem;
+	margin-bottom:1rem;
+	background-image:linear-gradient(#fcfcfc, #eee);
+	border:0.1rem solid #d5d5d5;
+	border-radius:0.3rem;
+	font-size: 1rem;
+	font-weight:bold;
+	text-align:center;
+	color:#5F5F5F;
+    -webkit-transition: background 1000ms linear;
+    -moz-transition: background 1000ms linear;
+    -o-transition: background 1000ms linear;
+    -ms-transition: background 1000ms linear;
+    transition: background 1000ms linear;
+}
+body.signup a {
+	font-size: 1rem;
+	color:#fcfcfc;
+	text-decoration:none;
+}
+body.signup a:hover {
+	color:#d5d5d5;
+	cursor:pointer;
+}
+body.signup input:hover {
+	background:#d5d5d5;
+	cursor:pointer;
+}
+body.signup div {margin:0;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:7%;
+	width:100%;
+	text-align:center;
+}
+body.signup img {
+	width: 14rem;
+	height: 4rem;
+	border:0px;
+}
+body.signup span {
+	color: white;
+	font-size:1rem;
+	line-height:0.2rem;
+}
+body.signup span+br+input.error  {
+	color:#8B0000;
+    background: #F08080;
+
+}
+body.signup span+br+input.error:-moz-placeholder {
+	color: #8B0000;
+}
+body.signup span+br+input.error::-webkit-input-placeholder {
+ 	color: #8B0000;
+}
+body.signup .main-span {
+	font-size:2.5rem;
+	line-height:4rem;
+}
+body.signup .form-button {
+	color:black;
+	margin-top:1rem;
+}
+body.signup span.error  {
+	color:#8B0000;
+    -webkit-animation-name: example;
+    -webkit-animation-duration: 2s;
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+/*footer menu*/
+.footer-menu div {
+	position: fixed;
+	width: 100%;
+	bottom: 0rem;
+	text-align: center;
+}
+.footer-menu div span {
+	color:rgba(192,192,192,0.4);
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+/*main page*/
+body.main section {
+	color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+body.main .main-center {
+	width: 60%;
+}
+body.main .main-rating {
+	text-align: center;
+	width: 20%;
+	min-height: 40rem;
+}
+body.main .main-news {
+	width: 20%;
+	min-height: 40rem;
+}
+body.main .main-news h1{
+	text-align: center;
+}
+body.main .main-logo {
+	text-align: center;
+	padding-top: 1.5rem;
+}
+body.main .main-rules {
+	width: 95%;
+	margin: 0;
+	margin-right: auto;
+	margin-left: auto; 
+	min-height: 31rem;
+}
+body.main .main-rules h1{
+	text-align: center;
+}
+body.main .main-rules p{
+	text-align: justify;
+}
+body.chooseGame section {
+	margin:0;
+	margin-left:auto;
+	margin-right:auto;
+	padding-top:0.1rem;
+}
+body.chooseGame img {
+	border:0px;
+	border-radius:11%;
+}
+body.chooseGame div {
+	margin:0;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:2%;
+	width:100%;
+	text-align:center;
+}
+body.chooseGame main {
+	position: relative;
+	min-height:38rem;
+	width:44rem;
+	margin: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+body.chooseGame .game-status {
+	margin:0;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:1rem;
+	margin-bottom:1rem;
+	width:100%;
+	text-align:center;
+}
+body.chooseGame .game-status span {
+	font-size:4rem;
+	color:#fcfcfc;
+}
+body.chooseGame .game-table {
+	display:inline-block;
+	margin:0.3rem;
+	border: 0.1rem solid rgba(0,0,0,0);
+	background-color:rgba(0,0,0,0);
+	border-radius:10%;
+	cursor:pointer;
+}
+body.chooseGame .game-table span {
+	color:#fcfcfc;
+}
+body.chooseGame .game-table:hover {
+	border: 0.1rem solid red;
+}
+body.chooseGame .game-table-pic {
+	width:21rem;
+	height:15rem;
+	background-image: url(../img/Blackjack_table.jpg);
+	background-size:100% 100%;
+	border-radius:11%;
+}
+body.chooseGame .game-table-status {
+	text-align:center;
+}
+body.chooseGame .game-table-status {
+	font-size:1rem;
+}
+/*-----game------------*/
+body.black-jack-game span {
+	font-size: 0.5rem;color:#fcfcfc;
+}
+body.black-jack-game .chips {
+	width:3.5rem;
+	height:3.5rem;
+	border:0.1rem solid black;
+	border-radius:50%;
+	display:inline-block;
+	z-index:2;
+}
+body.black-jack-game .chips.hide{
+	display:none;
+}
+body.black-jack-game .chips.onPlayer:hover{
+	border:0.1rem solid red;
+	cursor:pointer;
+}
+body.black-jack-game .chips.chip5 {
+	background:url(../img/chip5.jpg) no-repeat;
+	background-size:100% 100%;position:absolute;
+	box-shadow:0.05rem 0.05rem 0.1rem 0.1rem;
+}
+body.black-jack-game .chips.chip25 {
+	background:url(../img/chip25.jpg) no-repeat;
+	background-size:100% 100%;
+	position:absolute;
+	box-shadow:0.05rem 0.05rem 0.1rem 0.1rem;
+}
+body.black-jack-game .chips.chip50 {
+	background:url(../img/chip50.jpg) no-repeat;
+	background-size:100% 100%;
+	position:absolute;
+	box-shadow:0.05rem 0.05rem 0.1rem 0.1rem;
+}
+body.black-jack-game .chips.chip100 {
+	background:url(../img/chip100.jpg) no-repeat;
+	background-size:100% 100%;
+	position:absolute;
+	box-shadow:0.05rem 0.05rem 0.1rem 0.1rem;}
+body.black-jack-game .chips.chip500 {
+	background:url(../img/chip500.jpg) no-repeat;
+	background-size:100% 100%;
+	width:3.7rem;
+	height:3.7rem;
+	position:absolute;
+	box-shadow:0.05rem 0.05rem 0.1rem 0.1rem;
+}
+body.black-jack-game .chips.chip1000 {background:url(../img/chip1000.jpg) no-repeat;
+	background-size:100% 100%;
+	width:4.1rem;
+	height:4.1rem;
+	position:absolute;
+	box-shadow:0.05rem 0.05rem 0.1rem 0.1rem;
+}
+body.black-jack-game .game-field-chips {
+	width:30rem;
+	position:absolute;
+	bottom:11.5rem;
+	left:0.3rem;}
+body.black-jack-game .chair {
+	width:4.5rem;
+	height:4.5rem;
+}
+body.black-jack-game .place{
+	position:absolute;
+	cursor: pointer;
+	z-index:2;
+}
+body.black-jack-game .player-info, .player-info span {
+	color: white;
+	text-align: left;
+	font-size: 1rem;
+}
+body.black-jack-game .place.player{
+	border: 0.2rem solid rgba(0,0,0,0);
+	border-radius:15% 15% 15% 15%;
+}
+body.black-jack-game .place.player:hover{
+	border: 0.2rem solid red;
+	border-radius:15% 15% 15% 15%;
+}
+body.black-jack-game .place.player .place-player-name{
+	color: white;
+	text-align: center;
+	font-size: 1rem;
+}
+body.black-jack-game .place.empty .chair{
+	background:url(../img/chair.jpg) no-repeat;
+	background-size:100%;
+}
+body.black-jack-game .place.player .chair{
+	background-size:100%;
+	border-radius:15% 15% 15% 15%;
+}
+body.black-jack-game .place.empty .chair:hover{
+	border: 0.2rem solid red;
+}
+body.black-jack-game #player0.place {
+	left:-5rem;
+	top:9.5rem;
+}
+body.black-jack-game #player0.place.empty .chair{
+	border-radius:50% 30% 30% 50%;
+}
+body.black-jack-game #player1.place {
+	right:-5rem;
+	top:9.5rem;
+}
+body.black-jack-game #player1.place.empty .chair{
+	border-radius:50% 30% 30% 50%;
+	transform:scale(-1,1)
+}
+body.black-jack-game #player2.place{
+	left:-2.7rem;
+	top:23.5rem;
+}
+body.black-jack-game #player2.place.empty .chair {
+	border-radius:50% 30% 30% 50%;
+	transform: rotate(-30deg);
+}
+body.black-jack-game #player3.place {
+	right:-2.7rem;
+	top:23.5rem;
+}
+body.black-jack-game #player3.place.empty .chair {
+	border-radius:50% 30% 30% 50%;
+	transform: rotate(30deg) scale(-1,1);
+}
+body.black-jack-game #player4.place {
+	right:25rem;
+	bottom:-5rem;
+}
+body.black-jack-game #player4.place.empty .chair {
+	border-radius:50% 30% 30% 50%;
+	transform: rotate(90deg) scale(-1,1);
+}
+body.black-jack-game .game-field-cards {
+	font-size:0px;
+}
+body.black-jack-game .game-field-cards .cards-player0 {
+	position: absolute;
+	left: 1.5rem;
+	top: 8.5rem;
+}
+body.black-jack-game .game-field-cards .cards-player1 {
+	position: absolute;
+	left: 48.5rem;
+	top: 8.5rem;
+}
+body.black-jack-game .game-field-cards .cards-player2 {
+	position: absolute;
+	left: 2.5rem;
+	top: 18.5rem;
+}
+body.black-jack-game .game-field-cards .cards-player3 {
+	position: absolute;
+	left: 47rem;
+	top: 18.5rem;
+}
+body.black-jack-game .game-field-cards .cards-player4 {
+	position: absolute;
+	left: 20.5rem;
+	top: 25.5rem;
+}
+body.black-jack-game .game-status {
+	margin:0;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:1rem;
+	margin-bottom:1rem;
+	width:100%;
+	text-align:center;
+}
+body.black-jack-game .game-status span, body.black-jack-game .control-panel-playerBank span {
+	font-size:1.5rem;
+}
+body.black-jack-game .game-field {
+	width:54rem;
+	min-height:35rem;
+	margin:0;
+	margin-left:auto;
+	margin-right:auto;
+	padding-top:0.5rem;
+	border:0.35rem solid rgb(51,13,2);
+	border-radius:5% 5% 50% 50%;
+	background: radial-gradient(ellipse at 50% 50%, rgb(52,182,48),rgb(11,34,11));
+	position:relative;
+}
+body.black-jack-game .game-field-cards-card {
+	width:4rem;
+	height:6rem;
+	border:0.05rem solid black;
+	border-radius:5%;
+	position:absolute;
+	box-shadow:0.1rem 0.1rem 0.02rem 0.02rem;
+}
+body.black-jack-game .control-panel {
+	width:60%;
+	min-height:12rem;
+	background:rgba(255,255,255,0);
+	position:absolute;
+	bottom:0rem;
+	left:11rem;/*display:none;*/
+}
+body.black-jack-game .control-panel-playerBank {
+	position:absolute;
+	bottom:1rem;
+	left:14.3rem;
+	z-index:1
+}
+/*control buttons*/
+/*bet*/
+body.black-jack-game .control-panel-button-bet {
+	background:url(../img/buttonBet.gif) no-repeat;
+	background-size:100% 100%;
+	width:6.5rem;
+	height:3rem;
+	border-radius:20% 20% 20% 20%;
+	position:absolute;
+	top:5.5rem;
+	left:12.5rem;
+}
+body.black-jack-game .control-panel-button-bet.hide {
+	display:none;
+}
+body.black-jack-game .control-panel-button-bet:hover {
+	border:0.15rem solid red;
+	cursor:pointer;
+}
+/*hit*/
+body.black-jack-game .control-panel-button-hit {
+	background:url(../img/buttonHit.gif) no-repeat;
+	background-size:100% 100%;
+	width:6.5rem;
+	height:3rem;
+	border-radius:20% 20% 20% 20%;
+	position:absolute;
+	top:1rem;
+	left:5.5rem;
+}
+body.black-jack-game .control-panel-button-hit.hide {
+	display:none;
+}
+body.black-jack-game .control-panel-button-hit:hover {
+	border:0.15rem solid red;
+	cursor:pointer;
+}
+/*x2*/
+body.black-jack-game .control-panel-button-x2 {
+	background:url(../img/buttonX2.gif) no-repeat;
+	background-size:100% 100%;
+	width:6.5rem;
+	height:3rem;
+	border-radius:20% 20% 20% 20%;
+	position:absolute;
+	top:1rem;
+	left:12.5rem;
+}
+body.black-jack-game .control-panel-button-x2.hide {
+	display:none;
+}
+body.black-jack-game .control-panel-button-x2:hover {
+	border:0.15rem solid red;
+	cursor:pointer;
+}
+/*stand*/
+body.black-jack-game .control-panel-button-stand {
+	background:url(../img/buttonStand.gif) no-repeat;
+	background-size:100% 100%;
+	width:6.5rem;
+	height:3rem;
+	border-radius:20% 20% 20% 20%;
+	position:absolute;
+	top:1rem;
+	left:19.5rem;
+}
+body.black-jack-game .control-panel-button-stand.hide {
+	display:none;
+}
+body.black-jack-game .control-panel-button-stand:hover {
+	border:0.15rem solid red;
+	cursor:pointer;
+}
+/*split*/
+body.black-jack-game .control-panel-button-split {
+	background:url(../img/buttonSplit.gif) no-repeat;
+	background-size:100% 100%;
+	width:6.5rem;
+	height:3rem;
+	border-radius:20% 20% 20% 20%;
+	position:absolute;
+	top:4.5rem;
+	left:12.5rem;
+}
+body.black-jack-game .control-panel-button-split.hide {
+	display:none;
+}
+body.black-jack-game .control-panel-button-split:hover {
+	border:0.15rem solid red;
+	cursor:pointer;
+}
+
+
+
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes example {
+    0% {color: white;}
+    50% {color:rgb(245, 76, 76);}
+    100% {color: white;}
+}
+/* Standard syntax */
+@keyframes example {
+    0% {color: white;}
+    50% {color: rgb(245, 76, 76);}
+    100% {color: white;}
+}

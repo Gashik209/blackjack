@@ -1,0 +1,14 @@
+<article class="header-munu">
+	<ul type="none">
+		<% if (isauth) { %>
+			<li class="user-name"><%=login%></li>
+			<a href="chooseGame"><li>Play Black Jack</li></a>
+			<a href="profile"><li>Profile</li></a>
+			<a href="signout"><li>Logout</li></a>
+		<% } %>
+		<% if (!isauth) { %>
+			<a href="register"><li>Play Black Jack</li></a>
+			<a href="signup"><li>SignIn</li></a>
+		<% } %>
+	</ul>
+</article>

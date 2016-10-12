@@ -1,0 +1,20 @@
+<body class="signup">
+	<header>
+		<div>
+			<a href="/">
+				<img src="static/img/logo.jpg">
+			</a>
+		</div>
+	</header>
+	<main>
+		<form id="mainForm">
+			<span>User Name</span></br>
+			<input type="text" name="Login" value="Login" onfocus="if (this.value=='Login') {this.value='';}" onblur="if (this.value=='') {this.value='Login';}"></br>
+			<span>Password</span><br>
+			<input type="text" name="Password" value="Password" onfocus="if (this.value == 'Password') {this.value = '';this.type='password';}" onblur="if (this.value == '') {this.value = 'Password';this.type='text';}"></br>
+			<input type="checkbox" name="RememberMe"><span>Remember me</span></br>
+				<a href="register" style="margin-right:2rem;">Sign Up</a><a href="rememberPsd" style="margin-left:2rem;">Forgot password?</a><br>	
+			<input type="submit" name="Submit" value="Sign In" style="color:black">
+		</form>
+	</main>
+</body>

@@ -1,0 +1,11 @@
+{
+	"port":8888,
+	"db":{
+		"dbusers":"db/nedb/users.db",
+		"dbsessions":"db/nedb/sessions.db"
+	},
+	"session_secret":"WeDontNeedNoEducation",
+	"card_deck_quantity":1,
+	"globalLog":false,
+	"maxPlaceOnTableByUser":3
+}
