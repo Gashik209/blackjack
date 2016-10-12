@@ -223,7 +223,7 @@ body.register span.error  {
     animation-iteration-count: infinite;
 }
 /*sign UP*/
-body.signup form {
+body.signin form {
 	margin:0;
 	margin-left:auto;
 	margin-right:auto;
@@ -231,7 +231,7 @@ body.signup form {
 	width:100%;
 	text-align:center;
 }
-body.signup input {
+body.signin input {
 	margin-top:0.3rem;
 	margin-bottom:1rem;
 	background-image:linear-gradient(#fcfcfc, #eee);
@@ -247,56 +247,56 @@ body.signup input {
     -ms-transition: background 1000ms linear;
     transition: background 1000ms linear;
 }
-body.signup a {
+body.signin a {
 	font-size: 1rem;
 	color:#fcfcfc;
 	text-decoration:none;
 }
-body.signup a:hover {
+body.signin a:hover {
 	color:#d5d5d5;
 	cursor:pointer;
 }
-body.signup input:hover {
+body.signin input:hover {
 	background:#d5d5d5;
 	cursor:pointer;
 }
-body.signup div {margin:0;
+body.signin div {margin:0;
 	margin-left:auto;
 	margin-right:auto;
 	margin-top:7%;
 	width:100%;
 	text-align:center;
 }
-body.signup img {
+body.signin img {
 	width: 14rem;
 	height: 4rem;
 	border:0px;
 }
-body.signup span {
+body.signin span {
 	color: white;
 	font-size:1rem;
 	line-height:0.2rem;
 }
-body.signup span+br+input.error  {
+body.signin span+br+input.error  {
 	color:#8B0000;
     background: #F08080;
 
 }
-body.signup span+br+input.error:-moz-placeholder {
+body.signin span+br+input.error:-moz-placeholder {
 	color: #8B0000;
 }
-body.signup span+br+input.error::-webkit-input-placeholder {
+body.signin span+br+input.error::-webkit-input-placeholder {
  	color: #8B0000;
 }
-body.signup .main-span {
+body.signin .main-span {
 	font-size:2.5rem;
 	line-height:4rem;
 }
-body.signup .form-button {
+body.signin .form-button {
 	color:black;
 	margin-top:1rem;
 }
-body.signup span.error  {
+body.signin span.error  {
 	color:#8B0000;
     -webkit-animation-name: example;
     -webkit-animation-duration: 2s;

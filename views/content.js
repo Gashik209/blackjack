@@ -13,8 +13,8 @@ exports.main=function() {
 exports.register=function() {
 	return app.fs.readFileSync(__dirname+'/content/register.ejs', 'utf-8');
 }
-exports.signup=function() {
-	return app.fs.readFileSync(__dirname+'/content/signup.ejs', 'utf-8');
+exports.signin=function() {
+	return app.fs.readFileSync(__dirname+'/content/signin.ejs', 'utf-8');
 }
 exports.chooseGame=function(){
 	var contentView=app.fs.readFileSync(__dirname+'/content/chooseGame.ejs', 'utf-8');
