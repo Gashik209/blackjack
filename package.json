@@ -12,6 +12,7 @@
   "dependencies": {
     "bcrypt-nodejs": "~0.0.3",
     "body-parser": "~1.0.0",
+    "cookie-parser": "^1.4.3",
     "ejs": "2.5.1",
     "express": "^4.8.5",
     "express-device": "^0.4.2",
