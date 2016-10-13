@@ -27,7 +27,7 @@
     "passport-remember-me": "0.0.1",
     "serve-favicon": "^2.0.1",
     "socket.io": "~1.4.8",
-    "socket.io-cookie": "0.0.1"
+    "socket.io-cookie-parser": "^1.0.0"
   },
   "engines": {
     "node": ">= 0.4.0"
