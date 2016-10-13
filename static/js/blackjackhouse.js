@@ -371,13 +371,14 @@ $(document).ready(function() {
 			}
 		});
 
-		socket.on('showButton', function(buttonName){
-		  showButton(buttonName);
-		  initChips();
+		socket.on("betsStage", function(data){
+			var playerBank=$(".control-panel-playerBank");
+			var bank=data[0].bank[$(".user-name").text()];
+			playerBank.find(".control-panel-playerBank-bank").text(bank);
+			showButton("bet");
+			initChips(bank);
+			playerBank.fadeIn('slow');
 		});
-		// socket.on('showChips', function(){
-		//   initChips();
-		// });
 		socket.on('initCard', function(data){
 		  // console.log(data);
 		  initCards(data.card[0][0],data.card[0][1],data.user);
@@ -413,17 +414,13 @@ $(document).ready(function() {
 		//--------------------SIT ON Place-------------------------
 		    socket.emit('sitOnPlace',place.attr("id").substr(6,1));
 		  }
-		});
-		//--------------------PLAYER INFO-------------------------
-		$(".place").on("mouseenter",(function(){
-		  var selectedPlace=$(this);
-		  if(selectedPlace.hasClass("player")){
-		    selectedPlace.prepend("<div class='player-info'>Bank:<span class='player-info-bank'>1000</span></br>win:<span class='player-info-win'>50%</span></br>register:</br><span class='player-info-win'>10.12.15</span><br></div>");
-		      selectedPlace.mouseleave(function(){
-		        $(".place.player").find(".player-info").remove();
-		      });
+		  else{
+		//--------------------PLAYER INFO-------------------------  
+			$(".control-panel").prepend("<div class='player-info'>Bank:<span class='player-info-bank'>1000</span></br>win:<span class='player-info-win'>50%</span></br>register:</br><span class='player-info-win'>10.12.15</span><br></div>");
 		  }
-		}));
+		});
+		
+		// $(".place").on("mouseenter",(function(){}));
 		//--------------------BET BUTTON------------------------------
 		$(".control-panel-button-bet").on("click",function(event){
 		  $(".chips.onPlayer").unbind("click").fadeOut('slow', function(){
@@ -518,8 +515,7 @@ $(document).ready(function() {
 		//--------------------END Hide BUTTONS--------------------------------
 
 		//--------------------INIT CHIPS----------------------------------
-		function initChips(){
-		  var currentPlayerBank=+$(".control-panel-playerBank").find("span").text();
+		function initChips(currentPlayerBank){
 		  var chipSection=$(".game-field-chips");
 
 		  initChip(5,33,-16);

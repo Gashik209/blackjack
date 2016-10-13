@@ -3,9 +3,8 @@
 		<div class="game-status">
 			<span>Table:</span>
 			<span class="game-status-gametable"><%=tableNum%></span>
-			<span>Bets:<%=tableMinBet%>/<%=tableMaxBet%></span>
-			<span> Bank: </span>
-			<span class="game-status-gameBank">0</span>
+			<span>Bets: <%=tableMinBet%>/<%=tableMaxBet%></span>
+			<span class="game-status-gameBank"></span>
 		</div>
 	</header>
 	<main>
@@ -48,7 +47,8 @@
 				<input type="button" name="stand" class="control-panel-button-stand hide">
 				<input type="button" name="split" class="control-panel-button-split hide">
 				<div class="control-panel-playerBank">
-					<span>1000</span>
+					<span>Bank: </span><span class="control-panel-playerBank-bank"></span></br>
+					<span>Bet: </span><span class="control-panel-playerBank-bet">0</span>
 				</div>
 			</section>
 		</section>

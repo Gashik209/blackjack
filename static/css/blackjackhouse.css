@@ -502,7 +502,7 @@ body.black-jack-game .place.player{
 	border: 0.2rem solid rgba(0,0,0,0);
 	border-radius:15% 15% 15% 15%;
 }
-body.black-jack-game .place.player:hover{
+body.black-jack-game .place.player.active{
 	border: 0.2rem solid red;
 	border-radius:15% 15% 15% 15%;
 }
@@ -603,7 +603,7 @@ body.black-jack-game .game-status span, body.black-jack-game .control-panel-play
 }
 body.black-jack-game .game-field {
 	width:54rem;
-	min-height:35rem;
+	min-height:34.8rem;
 	margin:0;
 	margin-left:auto;
 	margin-right:auto;
@@ -630,10 +630,15 @@ body.black-jack-game .control-panel {
 	left:11rem;/*display:none;*/
 }
 body.black-jack-game .control-panel-playerBank {
+	display: none;
+	min-width: 7rem;
 	position:absolute;
-	bottom:1rem;
-	left:14.3rem;
+	bottom:0.1rem;
+	left:27.3rem;
 	z-index:1
+}
+body.black-jack-game .control-panel-playerBank span {
+	display: inline;
 }
 /*control buttons*/
 /*bet*/
@@ -644,8 +649,8 @@ body.black-jack-game .control-panel-button-bet {
 	height:3rem;
 	border-radius:20% 20% 20% 20%;
 	position:absolute;
-	top:5.5rem;
-	left:12.5rem;
+	top:8rem;
+	left:37.5rem;
 }
 body.black-jack-game .control-panel-button-bet.hide {
 	display:none;
