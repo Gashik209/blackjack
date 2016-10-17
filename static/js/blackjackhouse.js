@@ -416,10 +416,17 @@ $(document).ready(function() {
 		});
 
 		socket.on('sendCard', function(data){
-			console.log(data);
 		  initCards(data.cardSuit,data.cardVal,data.player);
 		});
 
+		socket.on('initTradeButtons', function(data){
+			var place=$("#player"+data);
+			place.addClass("tradeStage");
+			place.css({"border":"0.2rem solid red"});
+			showButton("hit");
+			showButton("stand");
+			showButton("x2");
+		});
 
 		//-------------------------------------------------
 		// function AAA() {
@@ -436,8 +443,14 @@ $(document).ready(function() {
 
 
 		//--------------------GIVE ME MORE CARD----------------------------
-		$(".control-panel-button-hit").on("click",function(event){         
-		    
+		$(".control-panel-button-hit").on("click",function(event){
+			var place=$(".place.player.tradeStage");
+			place.css({"border":"0.2rem solid rgba(0,0,0,0)"});
+			place.removeClass("tradeStage");
+		    hideButton($(this));
+		    hideButton($(".control-panel-button-stand"));
+		    hideButton($(".control-panel-button-x2"));
+		    socket.emit('hit');
 		});
 		//--------------------STAND----------------------------
 		$(".control-panel-button-stand").on("click",function(event){         
