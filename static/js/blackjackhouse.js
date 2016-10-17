@@ -389,10 +389,11 @@ $(document).ready(function() {
 			placeBet();
 
 			function placeBet(){
-				if(!placeBets.length)
+				if(placeBets.length==0)
 					return;
 				$(".control-panel-playerBank-bet").text(0);
-				var place=placeBets[placeBets.length-1];
+				var place=placeBets[0];
+				console.log(place);
 				place.addClass("betStage");
 				place.css({"border":"0.2rem solid red"});
 				$(".control-panel-button-bet").on("click",function(event){
@@ -411,7 +412,7 @@ $(document).ready(function() {
 				showButton("bet");
 				initChips($(".control-panel-playerBank-bank").text());
 				playerBank.fadeIn('slow');
-				placeBets.splice(placeBets[placeBets.length-1],1);
+				placeBets.splice(placeBets[0],1);
 			}
 		});
 
@@ -424,10 +425,25 @@ $(document).ready(function() {
 			place.addClass("tradeStage");
 			place.css({"border":"0.2rem solid red"});
 			showButton("hit");
+			//--------------------GIVE ME MORE CARD----------------------------
+			$(".control-panel-button-hit").on("click",function(event){
+				var place=$(".place.player.tradeStage");
+				place.css({"border":"0.2rem solid rgba(0,0,0,0)"});
+				place.removeClass("tradeStage");
+			    hideButton($(this));
+			    hideButton($(".control-panel-button-stand"));
+			    hideButton($(".control-panel-button-x2"));
+			    socket.emit('hit');
+			});
 			showButton("stand");
 			showButton("x2");
 		});
 
+		socket.on('destroyCards', function(){
+			//--------------------Destroy CARDS----------------------------------
+			var gameCards=$(".game-field-cards-card");
+			gameCards.animate({"top":"25rem","left":"25rem"},"slow",function(){gameCards.fadeOut('fast',function(){gameCards.remove()})});
+		});
 		//-------------------------------------------------
 		// function AAA() {
 		//   socket.emit('private', "button2");
@@ -442,16 +458,7 @@ $(document).ready(function() {
 
 
 
-		//--------------------GIVE ME MORE CARD----------------------------
-		$(".control-panel-button-hit").on("click",function(event){
-			var place=$(".place.player.tradeStage");
-			place.css({"border":"0.2rem solid rgba(0,0,0,0)"});
-			place.removeClass("tradeStage");
-		    hideButton($(this));
-		    hideButton($(".control-panel-button-stand"));
-		    hideButton($(".control-panel-button-x2"));
-		    socket.emit('hit');
-		});
+
 		//--------------------STAND----------------------------
 		$(".control-panel-button-stand").on("click",function(event){         
 		    
@@ -509,11 +516,6 @@ $(document).ready(function() {
 		}
 		//--------------------END INIT CAR-------------------------------
 
-		//--------------------Destroy CARDS----------------------------------
-		function destroyCards(){
-		  var gameCards=$(".game-field-cards-card");
-		  gameCards.animate({"top":"1rem","left":"50rem"},"slow",function(){gameCards.fadeOut('fast',function(){gameCards.remove()})});
-		}
 		//--------------------END Destroy CAR-------------------------------
 
 		//--------------------Return Chips----------------------------------
