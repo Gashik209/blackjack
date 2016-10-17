@@ -372,16 +372,52 @@ $(document).ready(function() {
 		});
 
 		socket.on("betsStage", function(data){
+			var playerLogin=$(".user-name").text();
 			var playerBank=$(".control-panel-playerBank");
-			var bank=data[0].bank[$(".user-name").text()];
-			playerBank.find(".control-panel-playerBank-bank").text(bank);
-			showButton("bet");
-			initChips(bank);
-			playerBank.fadeIn('slow');
+			var placeBets=[];
+			data.forEach(function(item,i,arr){
+				if(item.login==playerLogin){
+					playerBank.find(".control-panel-playerBank-bank").text(item.bank);
+				}
+			});
+			$(".place.player").each(function(){
+				if($(this).find(".place-player-name").text()==playerLogin){
+					placeBets.push($(this));
+
+				}
+			})
+			placeBet();
+
+			function placeBet(){
+				if(!placeBets.length)
+					return;
+				$(".control-panel-playerBank-bet").text(0);
+				var place=placeBets[placeBets.length-1];
+				place.addClass("betStage");
+				place.css({"border":"0.2rem solid red"});
+				$(".control-panel-button-bet").on("click",function(event){
+					if(+$(".control-panel-playerBank-bet").text()<=0)
+						return;
+				  $(".chips.onPlayer").unbind("click").fadeOut('slow', function(){
+				    this.remove();
+				  });
+				  place.css({"border":"0.2rem solid rgba(0,0,0,0)"});
+				  place.removeClass("betStage");
+				  hideButton($(this));
+				  playerBank.fadeOut('slow');
+				  socket.emit('betsDone',place.attr("id").slice(-1));
+				  placeBet();       
+				});
+				showButton("bet");
+				initChips($(".control-panel-playerBank-bank").text());
+				playerBank.fadeIn('slow');
+				placeBets.splice(placeBets[placeBets.length-1],1);
+			}
 		});
-		socket.on('initCard', function(data){
-		  // console.log(data);
-		  initCards(data.card[0][0],data.card[0][1],data.user);
+
+		socket.on('sendCard', function(data){
+			console.log(data);
+		  initCards(data.cardSuit,data.cardVal,data.player);
 		});
 
 
@@ -421,15 +457,6 @@ $(document).ready(function() {
 		});
 		
 		// $(".place").on("mouseenter",(function(){}));
-		//--------------------BET BUTTON------------------------------
-		$(".control-panel-button-bet").on("click",function(event){
-		  $(".chips.onPlayer").unbind("click").fadeOut('slow', function(){
-		    this.remove();
-		  });
-		  hideButton($(this));
-		  socket.emit('betsDone');       
-		});
-		//--------------------END BET BUTTON------------------------------
 
 		//--------------------INIT CARD----------------------------------
 		function initCards(suit,rank,player){
@@ -441,6 +468,8 @@ $(document).ready(function() {
 		  animateCardToPlayer(newCard,playerCardField,player);
 		  function createCard(suit,rank,player){
 		    switch(player){
+		      case "dealer": var x=50; var y=0;
+		      	break;
 		      case 0: var x=-10; var y=-2;
 		        break;
 		      case 1: var x=-10; var y=-43;
@@ -535,13 +564,18 @@ $(document).ready(function() {
 		      }
 
 		      newChip.fadeIn('slow').removeClass("hide").on("click",function(event){
-
-		      showButton("bet");
-
 		        var currentChip=$(this);
+		        var playerBetField=$(".control-panel-playerBank-bet");
 		        var chipClass=currentChip.attr("class");
-
-		        socket.emit('chipToBank',currentChip.data("chipcost"));   
+		        var chipcost=currentChip.data("chipcost");
+		        var currentBankField=$(".control-panel-playerBank-bank");
+		        currentBankField.text(+currentBankField.text()-chipcost);
+		        playerBetField.text(+playerBetField.text()+chipcost);
+		        $(".chips.onPlayer").each(function(){
+		        	if($(this).data("chipcost")>currentBankField.text())
+		        		$(this).fadeOut("slow");
+		        });
+		        socket.emit('chipToBank',{place:$(".place.player.betStage").attr("id").slice(-1),chipcost:chipcost});   
 
 		        function randomShift(koefShift){
 		          var rndSift=+Math.random();
