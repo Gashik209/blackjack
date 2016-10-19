@@ -393,7 +393,6 @@ $(document).ready(function() {
 					return;
 				$(".control-panel-playerBank-bet").text(0);
 				var place=placeBets[0];
-				console.log(place);
 				place.addClass("betStage");
 				place.css({"border":"0.2rem solid red"});
 				$(".control-panel-button-bet").on("click",function(event){
@@ -419,6 +418,10 @@ $(document).ready(function() {
 		socket.on('sendCard', function(data){
 		  initCards(data.cardSuit,data.cardVal,data.player);
 		});
+		socket.on('openSecondDealerCard', function(data){
+			var secondCard=$(".cards-playerdealer .13_13");
+			secondCard.removeClass("13_13").addClass(data.cardSuit+"_"+data.cardVal).css({"background":"url(static/img/Cards/"+data.cardSuit+"_"+data.cardVal+".png) no-repeat","background-size":"100% 100%"});
+		});
 
 		socket.on('initTradeButtons', function(data){
 			var place=$("#player"+data);
@@ -433,9 +436,18 @@ $(document).ready(function() {
 			    hideButton($(this));
 			    hideButton($(".control-panel-button-stand"));
 			    hideButton($(".control-panel-button-x2"));
-			    socket.emit('hit');
+			    socket.emit('hit',place.attr("id").slice(-1));
 			});
 			showButton("stand");
+			$(".control-panel-button-stand").on("click",function(event){
+				var place=$(".place.player.tradeStage");
+				place.css({"border":"0.2rem solid rgba(0,0,0,0)"});
+				place.removeClass("tradeStage");
+			    hideButton($(this));
+			    hideButton($(".control-panel-button-hit"));
+			    hideButton($(".control-panel-button-x2"));
+			    socket.emit('stand',place.attr("id").slice(-1));
+			});
 			showButton("x2");
 		});
 

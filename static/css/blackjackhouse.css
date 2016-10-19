@@ -667,8 +667,8 @@ body.black-jack-game .control-panel-button-hit {
 	height:3rem;
 	border-radius:20% 20% 20% 20%;
 	position:absolute;
-	top:1rem;
-	left:5.5rem;
+	top:12rem;
+	left:26.5rem;
 }
 body.black-jack-game .control-panel-button-hit.hide {
 	display:none;
@@ -685,8 +685,8 @@ body.black-jack-game .control-panel-button-x2 {
 	height:3rem;
 	border-radius:20% 20% 20% 20%;
 	position:absolute;
-	top:1rem;
-	left:12.5rem;
+	top:12rem;
+	left:33.5rem;
 }
 body.black-jack-game .control-panel-button-x2.hide {
 	display:none;
@@ -703,8 +703,8 @@ body.black-jack-game .control-panel-button-stand {
 	height:3rem;
 	border-radius:20% 20% 20% 20%;
 	position:absolute;
-	top:1rem;
-	left:19.5rem;
+	top:12rem;
+	left:40.5rem;
 }
 body.black-jack-game .control-panel-button-stand.hide {
 	display:none;

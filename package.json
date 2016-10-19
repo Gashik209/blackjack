@@ -13,6 +13,9 @@
     "type": "git",
     "url": "https://github.com/Gashik209/blackjack.git"
   },
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "bcrypt-nodejs": "~0.0.3",
     "body-parser": "~1.0.0",
@@ -34,6 +37,6 @@
     "socket.io-cookie-parser": "^1.0.0"
   },
   "engines": {
-    "node": ">= 0.4.0"
+    "node": ">= 4.4.0"
   }
 }
