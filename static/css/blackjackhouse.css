@@ -493,7 +493,16 @@ body.black-jack-game .place{
 	cursor: pointer;
 	z-index:2;
 }
-body.black-jack-game .player-info, .player-info span {
+body.black-jack-game .player-info {
+	position: absolute;
+	background: rgba(192,192,192,0.4);
+	border-radius: 5%;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	width: 23rem;
+	height: 3rem;
+	left: -14rem;
+	bottom: -4rem;
 	color: white;
 	text-align: left;
 	font-size: 1rem;
@@ -506,10 +515,23 @@ body.black-jack-game .place.player.active{
 	border: 0.2rem solid red;
 	border-radius:15% 15% 15% 15%;
 }
-body.black-jack-game .place.player .place-player-name{
+body.black-jack-game .place.player .place-player-name {
 	color: white;
 	text-align: center;
 	font-size: 1rem;
+}
+body.black-jack-game #dealer.place_dealer {
+	position: absolute;
+	left:4rem;
+	top:-4rem;
+}
+body.black-jack-game #dealer.place_dealer .chair_dealer{
+	background:url(../img/dealer.png) no-repeat;
+	width: 4rem;
+	height: 4rem;
+	cursor: auto;
+	background-size:100%;
+	border-radius: 15% 15% 0% 0%;
 }
 body.black-jack-game .place.empty .chair{
 	background:url(../img/chair.jpg) no-repeat;
@@ -566,28 +588,28 @@ body.black-jack-game .game-field-cards {
 }
 body.black-jack-game .game-field-cards .cards-player0 {
 	position: absolute;
-	left: 1.5rem;
-	top: 8.5rem;
+	left: 0.4rem;
+	top: 8.9rem;
 }
 body.black-jack-game .game-field-cards .cards-player1 {
 	position: absolute;
-	left: 48.5rem;
-	top: 8.5rem;
+	left: 49.4rem;
+	top: 8.9rem;
 }
 body.black-jack-game .game-field-cards .cards-player2 {
 	position: absolute;
 	left: 2.5rem;
-	top: 18.5rem;
+	top: 19.5rem;
 }
 body.black-jack-game .game-field-cards .cards-player3 {
 	position: absolute;
 	left: 47rem;
-	top: 18.5rem;
+	top: 19.5rem;
 }
 body.black-jack-game .game-field-cards .cards-player4 {
 	position: absolute;
-	left: 20.5rem;
-	top: 25.5rem;
+	left: 18.5rem;
+	top: 26.8rem;
 }
 body.black-jack-game .game-status {
 	margin:0;
@@ -603,7 +625,7 @@ body.black-jack-game .game-status span, body.black-jack-game .control-panel-play
 }
 body.black-jack-game .game-field {
 	width:54rem;
-	min-height:34.8rem;
+	min-height:33.4rem;
 	margin:0;
 	margin-left:auto;
 	margin-right:auto;
