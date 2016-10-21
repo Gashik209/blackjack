@@ -7,7 +7,7 @@
 	},
 	"session_secret":"WeDontNeedNoEducation",
 	"card_deck_quantity":2,
-	"globalLog":false,
+	"globalLog":true,
 	"maxPlaceOnTableByUser":3,
 	"after_round_delay":3000,
 	"players_max_card_limit":5

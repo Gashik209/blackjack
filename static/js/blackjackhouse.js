@@ -364,14 +364,16 @@ $(document).ready(function() {
 				    selectPlace.find(".chair").css({"background":"url(static/img/avatars/"+players[key]+".jpg) no-repeat","background-size":"100%"});
 				}
 				else{
-					selectPlace.addClass("empty").removeClass("player");
+					selectPlace.removeClass().addClass("place").addClass("empty").css({"border":"0.2rem solid rgba(0,0,0,0)"});
 					selectPlace.find(".place-player-name").text("");
 					selectPlace.find(".chair").css({'background':"url(../static/img/chair.jpg) no-repeat","background-size":"100%"});
+					activateBetButton();
 				}
 			}
 		});
 
 		socket.on("betsStage", function(data){
+			console.log(data);
 			var playerLogin=$(".user-name").text();
 			var playerBankField=$(".control-panel-playerBank");
 			data.forEach(function(item,i,arr){
@@ -383,29 +385,33 @@ $(document).ready(function() {
 				var place=$(this);
 				if(place.find(".place-player-name").text()==playerLogin){
 					place.addClass("betStage-wait");
+					place.data("bet", 0);
 				}
 			});
 			activateBetButton();	
 		});
 		//--------------------Bet button-----------------------------
 		function activateBetButton(){
+			if($(".place.player.betStage").length>0)
+				return;
 			var betStageWait=$(".place.player.betStage-wait");
-	     	if(betStageWait.length==0)
+	     	if(betStageWait.length<1)
 	     	 	return;
 	     	if($(".control-panel-playerBank-bank").text()<=0){
 	     	   	socket.emit('standFromPlace',betStageWait.eq(0).attr("id").substr(6,1));
 	     	   	return;
 	     	}
 			$(".betStage-wait").eq(0).removeClass("betStage-wait").addClass("betStage").css({"border":"0.2rem solid red"});
-			$(".control-panel-playerBank").fadeIn('slow');
-			initChips();
+			var betStage=$(".place.player.betStage");
 			showButton("bet");
+			initChips();
+			$(".control-panel-playerBank-bet").text(betStage.data("bet"));
+			$(".control-panel-playerBank").fadeIn('slow');
 			$(".control-panel-button-bet").on("click",function(event){
-			  var betStage=$(".place.player.betStage");
-			  if(+$(".control-panel-playerBank-bet").text()<=0){
+			  if(+betStage.data("bet")<=0){
 					return;
 			  }
-			  socket.emit('betsDone',betStage.attr("id").slice(-1));
+			  socket.emit('betsDone',betStage.attr("id").substr(6,1));
 			  $(".chips.onPlayer").unbind("click").fadeOut('slow', function(){
 			    this.remove();
 			  });
@@ -413,7 +419,7 @@ $(document).ready(function() {
 			  betStage.css({"border":"0.2rem solid rgba(0,0,0,0)"});
 			  betStage.removeClass("betStage");
 			  hideButton($(this));	  
-			  activateBetButton();	
+			  activateBetButton();
 			});
 		}
 
@@ -425,11 +431,12 @@ $(document).ready(function() {
 			secondCard.removeClass("13_13").addClass(data.cardSuit+"_"+data.cardVal).css({"background":"url(static/img/Cards/"+data.cardSuit+"_"+data.cardVal+".png) no-repeat","background-size":"100% 100%"});
 		});
 
-		socket.on('initTradeButtons', function(data){
-			$("#player"+data).addClass("tradeStage-wait");
+		socket.on('initTradeRound', function(data){
+			data.forEach(function(item,i,arr){
+				$("#player"+item).addClass("tradeStage-wait");
+			});
 			activateTradeButtons();
 		});
-
 
 		function activateTradeButtons() {
 			var tradeStageWait=$(".place.player.tradeStage-wait");
@@ -444,7 +451,8 @@ $(document).ready(function() {
 			    hideButton($(".control-panel-button-hit"));
 			    hideButton($(".control-panel-button-stand"));
 			    hideButton($(".control-panel-button-x2"));
-			    socket.emit('hit',place.attr("id").slice(-1));
+			    socket.emit('hit',place.attr("id").substr(6,1));
+			    activateTradeButtons();
 			});
 			showButton("stand");
 			$(".control-panel-button-stand").on("click",function(event){
@@ -453,7 +461,8 @@ $(document).ready(function() {
 			    hideButton($(".control-panel-button-stand"));
 			    hideButton($(".control-panel-button-hit"));
 			    hideButton($(".control-panel-button-x2"));
-			    socket.emit('stand',place.attr("id").slice(-1));
+			    socket.emit('stand',place.attr("id").substr(6,1));
+			    activateTradeButtons();
 			});
 			showButton("x2");
 			$(".control-panel-button-x2").mouseover(function() {
@@ -461,7 +470,6 @@ $(document).ready(function() {
 			}).mouseout(function() {
     		$(".control-panel-playerBank").stop().fadeOut("fast");
   			});
- 			activateTradeButtons();
 		}
 
 
@@ -512,7 +520,6 @@ $(document).ready(function() {
 		  }
 		  else if(place.find(".place-player-name").text()==$(".user-name").text()){
 		//--------------------Stand from the place-------------------------
-
 			socket.emit('standFromPlace',place.attr("id").substr(6,1));
 		  }
 		  else{
@@ -627,15 +634,18 @@ $(document).ready(function() {
 
 		      newChip.fadeIn('slow').removeClass("hide").on("click",function(event){
 		        var currentChip=$(this);
+		        var currentBetStage=$(".place.player.betStage");
 		        var playerBetField=$(".control-panel-playerBank-bet");
 		        var chipClass=currentChip.attr("class");
 		        var chipcost=currentChip.data("chipcost");
 		        var currentBankField=$(".control-panel-playerBank-bank");
 		        currentBankField.text(+currentBankField.text()-chipcost);
-		        playerBetField.text(+playerBetField.text()+chipcost);
+		        currentBetStage.data("bet",+currentBetStage.data("bet")+chipcost);
+		        playerBetField.text(+currentBetStage.data("bet"));
+
 		        $(".chips.onPlayer").each(function(){
 		        	if($(this).data("chipcost")>currentBankField.text())
-		        		$(this).fadeOut("slow");
+		        		$(this).off("click").fadeOut("slow");
 		        });
 		        socket.emit('chipToBank',{place:$(".place.player.betStage").attr("id").slice(-1),chipcost:chipcost});   
 
