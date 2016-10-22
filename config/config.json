@@ -10,5 +10,6 @@
 	"globalLog":true,
 	"maxPlaceOnTableByUser":3,
 	"after_round_delay":3000,
-	"players_max_card_limit":5
+	"players_max_card_limit":5,
+	"dealer_turn_delay":700
 }
