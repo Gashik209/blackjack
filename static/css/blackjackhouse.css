@@ -522,7 +522,7 @@ body.black-jack-game .place.player .place-player-name {
 }
 body.black-jack-game #dealer.place_dealer {
 	position: absolute;
-	left:4rem;
+	left:0rem;
 	top:-4rem;
 }
 body.black-jack-game #dealer.place_dealer .chair_dealer{
@@ -653,7 +653,7 @@ body.black-jack-game .control-panel {
 }
 body.black-jack-game .control-panel-playerBank {
 	display: none;
-	min-width: 7rem;
+	min-width: 10rem;
 	position:absolute;
 	bottom:0.1rem;
 	left:27.3rem;
