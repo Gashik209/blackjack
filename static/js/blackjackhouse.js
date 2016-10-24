@@ -478,18 +478,16 @@ $(document).ready(function() {
 			}).mouseout(function() {
     		$(".control-panel-playerBank").stop().fadeOut("fast");
   			});
+			$(".control-panel-button-x2").on("click",function(event){
+				place.css({"border":"0.2rem solid rgba(0,0,0,0)"});
+				place.removeClass("tradeStage");
+			    hideButton($(".control-panel-button-stand"));
+			    hideButton($(".control-panel-button-hit"));
+			    hideButton($(".control-panel-button-x2"));
+			    socket.emit('x2',place.attr("id").substr(6,1));
+			    activateTradeButtons();
+			});
 		}
-
-
-			
-
-
-
-		
-		socket.on('initX2Button', function(data){
-			showButton("x2");
-
-		});
 
 		socket.on('destroyCards', function(){
 			//--------------------Destroy CARDS----------------------------------
