@@ -431,10 +431,12 @@ $(document).ready(function() {
 			secondCard.removeClass("13_13").addClass(data.cardSuit+"_"+data.cardVal).css({"background":"url(static/img/Cards/"+data.cardSuit+"_"+data.cardVal+".png) no-repeat","background-size":"100% 100%"});
 		});
 
-		socket.on('initTradeRound', function(players,cardDeckNum){
+		socket.on('initTradeRound', function(data,cardDeckNum){
 			console.log("card Deck № "+cardDeckNum);
-			players.forEach(function(item,i,arr){
-				$("#player"+item).addClass("tradeStage-wait");
+			data.forEach(function(item,i,arr){
+				var place=$("#player"+item);
+				if(place.find(".place-player-name").text()==$(".user-name").text())
+					place.addClass("tradeStage-wait");
 			});
 			activateTradeButtons();
 		});
