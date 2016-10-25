@@ -6,6 +6,7 @@
 		"dbsessions":"db/nedb/sessions.db"
 	},
 	"session_secret":"WeDontNeedNoEducation",
+	"remember_me_duration":30,
 	"card_deck_quantity":2,
 	"globalLog":true,
 	"maxPlaceOnTableByUser":3,
