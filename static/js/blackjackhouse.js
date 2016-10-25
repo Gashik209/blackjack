@@ -409,7 +409,7 @@ $(document).ready(function() {
 			$(".control-panel-playerBank").fadeIn('slow');
 			$(".control-panel-button-bet").on("click",function(event){
 			  if(+betStage.data("bet")<+$(".game-status").find("span").eq(2).text().split('/')[0].split(' ')[1]){
-					return;//add red flash
+					return;
 			  }
 			  socket.emit('betsDone',betStage.attr("id").substr(6,1));
 			  $(".chips.onPlayer").unbind("click").fadeOut('slow', function(){
@@ -502,6 +502,7 @@ $(document).ready(function() {
 			});
 			var gameCards=$(".game-field-cards-card");
 			gameCards.animate({"top":"25rem","left":"25rem"},"slow",function(){gameCards.fadeOut('fast',function(){gameCards.remove()})});
+			returnChips(1);
 		});
 
 		//--------------------click on place----------------------

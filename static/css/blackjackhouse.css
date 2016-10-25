@@ -111,7 +111,7 @@ body.err404 img {
 }
 .control-panel-chat-players {
 	height:12rem;
-	width:18%;
+	width:15rem;
 	margin-top:0.2rem;
 	display:inline-block;
 	background:rgba(200,200,200,0.5);
@@ -123,7 +123,7 @@ body.err404 img {
 .control-panel-chat-input-text {
 	margin-top:0.2rem;
 	display:inline-block;
-	width:14rem;
+	width:95%;
 	height:1.3rem;
 	background:rgba(230,230,230,0.5);
 	font-size:1.05rem;
