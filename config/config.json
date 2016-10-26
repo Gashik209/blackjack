@@ -5,8 +5,12 @@
 		"dbusersStat":"db/nedb/usersStat.db",
 		"dbsessions":"db/nedb/sessions.db"
 	},
+	"admin_account":{
+		"login":"admin",
+		"password":"admin"
+	},
 	"session_secret":"WeDontNeedNoEducation",
-	"remember_me_duration":30,
+	"remember_me_duration":10,
 	"card_deck_quantity":2,
 	"globalLog":true,
 	"maxPlaceOnTableByUser":3,

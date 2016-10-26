@@ -753,7 +753,47 @@ body.black-jack-game .control-panel-button-split:hover {
 	border:0.15rem solid red;
 	cursor:pointer;
 }
-
+body.profile .main-profile {
+	position: relative;
+    min-height: 38rem;
+    width: 50rem;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:5rem;
+}
+body.profile .main-profile .profile-user-avatar{
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	width: 10rem;
+	height: 10rem;
+	font-size: 0px;
+	border: 0.3rem solid red;
+}
+body.profile .main-profile .profile-user-avatar img{
+	width: 10rem;
+	height: 10rem;
+}
+body.profile .main-profile .profile-user-statistic{
+	padding: 0rem;
+	display: inline-block;
+	margin-left: 1rem;
+	height: 10rem;
+	width: 37rem;
+/*	background: blue;*/
+	font-size: 2rem;
+	line-height: 0.3rem;
+	color:white;
+}
+body.profile .main-profile .profile-user-container{
+	margin-top: 1rem;
+	height: 20rem;
+	font-size: 2rem;
+	line-height: 0.3rem;
+	color:white;
+	/*background: green;*/
+}
 
 
 

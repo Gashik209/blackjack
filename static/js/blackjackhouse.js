@@ -351,6 +351,34 @@ $(document).ready(function() {
 		});
 	})();
 
+	;(function(){//----------------------------Admin_signIn
+
+		var form=$("#mainFormAdmin");
+
+		function ajaxlogin(){
+			var passField=form.find("input[name=Password]");
+			var username=form.find("input[name=Login]").val();
+			$.ajax({
+				url: "/adminsignin",
+				method: "POST",
+				contentType:"application/json; charset=utf-8",
+				data: JSON.stringify({username:username,password:passField.val()}),
+				dataType: "text",
+			    success: function(response) {
+			    	location.reload();
+			    },
+				error: function(response) {
+					inputError(passField, "Сбой соединения... попробуйте позже");
+				}
+			});
+		}
+
+		form.on("submit",function(event){
+			event.preventDefault();
+			ajaxlogin();
+		});
+	
+	})();
 
 
 	;(function(){//----------------game-------------------------------------------------------

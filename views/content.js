@@ -1,3 +1,4 @@
+var users_sessions=require(__dirname+"/../lib/users_sessions.js");
 var app=require(__dirname+"/../app.js")
 var game=require(__dirname+"/../lib/game.js")
 var parts=require(__dirname+"/parts.js");
@@ -10,11 +11,73 @@ exports.err500=function() {
 exports.main=function() {
 	return app.fs.readFileSync(__dirname+'/content/main.ejs', 'utf-8');
 }
+exports.profile=function() {
+	return app.fs.readFileSync(__dirname+'/content/profile.ejs', 'utf-8');
+}
 exports.register=function() {
 	return app.fs.readFileSync(__dirname+'/content/register.ejs', 'utf-8');
 }
 exports.signin=function() {
 	return app.fs.readFileSync(__dirname+'/content/signin.ejs', 'utf-8');
+}
+exports.administrate=function() {
+	var content="<style>body{color:white;}</style>";
+		for(var key in users_sessions.autorizedUsers){
+			content+="<b>session :"+key+"</b><br>";
+			content+="device: "+users_sessions.autorizedUsers[key].device+"<br>";
+			content+="connected: "+users_sessions.autorizedUsers[key].connected+"<br>";
+			content+="id: "+users_sessions.autorizedUsers[key].id+"<br>";
+			content+="login: "+users_sessions.autorizedUsers[key].login+"<br>";
+			content+="socket: "+users_sessions.autorizedUsers[key].socket+"<br>";
+			content+="location: "+users_sessions.autorizedUsers[key].location+"<br>";
+			content+="bank: "+users_sessions.autorizedUsers[key].bank+"<br>";
+			content+="table: "+users_sessions.autorizedUsers[key].table+"<br>";
+			content+="ingamePlace: "+users_sessions.autorizedUsers[key].ingamePlace+"<br>";
+			content+="<br>";
+		}
+		content+="<hr><br>";
+		for(var key in game.gameTables){
+			content+="<b>table :"+key+"</b><br>";
+			content+="tableNum: "+game.gameTables[key].tableNum+"<br>";
+			content+="tableMinBet: "+game.gameTables[key].tableMinBet+"<br>";
+			content+="tableMaxBet: "+game.gameTables[key].tableMaxBet+"<br>";
+			content+="created: "+game.gameTables[key].created+"<br>";
+			content+="creater: "+game.gameTables[key].creater+"<br>";
+			content+="gameStatus: "+game.gameTables[key].gameStatus+"<br>";
+			content+="roundNum: "+game.gameTables[key].roundNum+"<br>";
+			for(var player in game.gameTables[key].players){
+				if(game.gameTables[key].players[player]!=null){
+					content+="_____player_"+player+"_sessionID: "+game.gameTables[key].players[player].sessionID+"<br>";
+					content+="_____player_"+player+"_bet: "+game.gameTables[key].players[player].bet+"<br>";
+					content+="_____player_"+player+"_cards: "+game.gameTables[key].players[player].cards+"<br>";
+					content+="_____player_"+player+"_cardScore: "+game.gameTables[key].players[player].cardScore+"<br>";
+					content+="_____player_"+player+"_playerStatus: "+game.gameTables[key].players[player].playerStatus+"<br>";
+				}
+				else{
+					content+="player_"+player+": null<br>";
+				}
+			}
+			content+="dealer cards: ";
+			for(var dealerCard in game.gameTables[key].dealer.cards){
+				content+=game.gameTables[key].dealer.cards[dealerCard]+";";
+			}
+			content+="<br>dealer score: ";
+			content+=game.gameTables[key].dealer.cardScore;
+			content+="<br>";
+			content+="TableCardDecks:<br>";
+			for (var i=game.gameTables[key].cardDecks.length-1; i>=0; i--) {
+				for (var j=game.gameTables[key].cardDecks[i].length-1; j>=0; j--) {
+					content+=game.gameTables[key].cardDecks[i][j][0]+"."+game.gameTables[key].cardDecks[i][j][1]+";";
+				}
+				content+="<br>";
+			}
+			content+="activeDeck: "+game.gameTables[key].activeDeck+"<br>";
+			content+="<br>";
+		}
+	return content;
+}
+exports.adminSignIn=function() {
+	return app.fs.readFileSync(__dirname+'/content/adminSignin.ejs', 'utf-8');
 }
 exports.chooseGame=function(){
 	var contentView=app.fs.readFileSync(__dirname+'/content/chooseGame.ejs', 'utf-8');
