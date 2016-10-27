@@ -339,11 +339,21 @@ $(document).ready(function() {
 
 	})();
 
-	;(function(){//choose game sector
+	;(function(){//choose game
+		$("[name=min-bet]").on("click", function() {
+			var minBetLimit=$(this).attr("id").split("-")[2];
+			$("[name=max-bet]").each(function(){
+				if($(this).attr("id").split("-")[2]<minBetLimit)
+					console.log(minBetLimit);
+			})
+			
+			// .attr('disabled',true)
+		});
 		$("#newTable").on("click", function(){
 			var data={};
-			data.minBet=5;
-			data.maxBet=50;
+			var betsLimit=$( "input:checked" );
+			data.minBet=betsLimit.eq(0).attr("id").split("-")[2];
+			data.maxBet=betsLimit.eq(1).attr("id").split("-")[2];
 			socket.emit('addNewTable',data);
 		});
 		socket.on('addNewTable', function(data){
