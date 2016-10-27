@@ -11,8 +11,27 @@ exports.err500=function() {
 exports.main=function() {
 	return app.fs.readFileSync(__dirname+'/content/main.ejs', 'utf-8');
 }
-exports.profile=function() {
-	return app.fs.readFileSync(__dirname+'/content/profile.ejs', 'utf-8');
+exports.profile=function(sessionID) {
+	var page;
+	var contentView=app.fs.readFileSync(__dirname+'/content/profile.ejs', 'utf-8');
+	var promise=users_sessions.autorizedUsers[sessionID].playerInfo();
+	return promise.then(function(result){
+		var regdate=new Date(result.regdate)
+		regdate=regdate.getDate()+"/"+parseInt(1+regdate.getMonth())+"/"+regdate.getFullYear();
+		return app.ejs.render(contentView, {
+			login:users_sessions.autorizedUsers[sessionID].login,
+			avatar:"static/img/avatars/"+result.avatar,
+			bank:result.bank,
+			regDate:regdate,
+			played:result.played,
+			win:result.win,
+			draw:+result.played-+result.win-+result.loose,
+			loose:result.loose,
+			percWin:result.played>0?Math.ceil((+result.win/+result.played)*100):0,
+			maxWin:result.maxwin,
+			maxLost:result.maxlost
+		});
+	});
 }
 exports.register=function() {
 	return app.fs.readFileSync(__dirname+'/content/register.ejs', 'utf-8');

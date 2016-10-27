@@ -388,8 +388,8 @@ $(document).ready(function() {
 				var selectPlace=$("#player"+key+".place");
 				if(players[key]!=null){
 				    selectPlace.removeClass("empty").addClass("player");
-				    selectPlace.find(".place-player-name").text(players[key]);
-				    selectPlace.find(".chair").css({"background":"url(static/img/avatars/"+players[key]+".jpg) no-repeat","background-size":"100%"});
+				    selectPlace.find(".place-player-name").text(players[key].login);
+				    selectPlace.find(".chair").css({"background":"url(static/img/avatars/"+players[key].avatar+") no-repeat","background-size":"100%"});
 				}
 				else{
 					selectPlace.removeClass().addClass("place").addClass("empty").css({"border":"0.2rem solid rgba(0,0,0,0)"});

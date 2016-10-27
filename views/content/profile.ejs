@@ -1,21 +1,22 @@
 <body class="profile">
 	<section class="main-profile">
 		<div class="profile-user-avatar">
-			<img src="static/img/avatars/Login.jpg">
+			<img src=<%=avatar%>>
 		</div>
 		<div class="profile-user-statistic">
-			<dir class="profile-user-statistic-login">Login: <span>Login</span></dir>
-			<dir class="profile-user-statistic-bank">Bank: <span>1000</span></dir>
+			<dir class="profile-user-statistic-login">Login: <span><%=login%></span></dir>
+			<dir class="profile-user-statistic-bank">Bank: <span><%=bank%></span></dir>
 		</div>
 		<div class="profile-user-container">
 			<div class="profile-user-container-stat">
-				<dir class="profile-user-container-statistic-regdate">Registered: <span>12.12.2016</span></dir>
-				<dir class="profile-user-container-statistic-regdate">Games played: <span>10</span></dir>
-				<dir class="profile-user-container-statistic-regdate">Rounds win: <span>5</span></dir>
-				<dir class="profile-user-container-statistic-regdate">Rounds loose: <span>5</span></dir>
-				<dir class="profile-user-container-statistic-regdate">% win: <span>50</span>%</dir>
-				<dir class="profile-user-container-statistic-regdate">Max win: <span>20</span></dir>
-				<dir class="profile-user-container-statistic-regdate">Max lost: <span>10</span></dir>
+				<dir class="profile-user-container-statistic-regdate">Registered: <span><%=regDate%></span></dir>
+				<dir class="profile-user-container-statistic-regdate">Games played: <span><%=played%></span></dir>
+				<dir class="profile-user-container-statistic-regdate">Rounds win: <span><%=win%></span></dir>
+				<dir class="profile-user-container-statistic-regdate">Rounds draw: <span><%=draw%></span></dir>
+				<dir class="profile-user-container-statistic-regdate">Rounds loose: <span><%=loose%></span></dir>
+				<dir class="profile-user-container-statistic-regdate">Wins: <span><%=percWin%></span>%</dir>
+				<dir class="profile-user-container-statistic-regdate">Max win: <span><%=maxWin%></span></dir>
+				<dir class="profile-user-container-statistic-regdate">Max lost: <span><%=maxLost%></span></dir>
 			</div>
 			<div class="profile-user-container-pass-ch">
 				
