@@ -3,11 +3,22 @@
 	"db":{
 		"dbusers":"db/nedb/users.db",
 		"dbusersStat":"db/nedb/usersStat.db",
-		"dbsessions":"db/nedb/sessions.db"
+		"dbsessions":"db/nedb/sessions.db",
+		"dbchat":"db/nedb/chat.db",
+		"dbgame":"db/nedb/game.db",
+		"dbsystem":"db/nedb/system.db"
 	},
 	"admin_account":{
 		"login":"admin",
 		"password":"admin"
+	},
+	"tables_on_server_start":{
+		"enable":true,
+		"name":"system",
+		"tables":{
+			"1":"5/50",
+			"2":"10/100"
+		}
 	},
 	"session_secret":"WeDontNeedNoEducation",
 	"remember_me_duration":10,
@@ -16,5 +27,8 @@
 	"maxPlaceOnTableByUser":3,
 	"after_round_delay":3000,
 	"players_max_card_limit":5,
-	"dealer_turn_delay":700
+	"dealer_turn_delay":700,
+	"chat_log":true,
+	"game_log":true,
+	"system_log":true
 }

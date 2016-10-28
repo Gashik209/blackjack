@@ -18,7 +18,7 @@ var config=require(__dirname+"/config");
 var cookieParser=require("cookie-parser");
 var device = require('express-device');
 
-var dbnedb=require(__dirname+"/lib/dbnedb.js").dbnedb(Datastore,__dirname+"/"+config.get("db:dbusers"),__dirname+"/"+config.get("db:dbusersStat"),__dirname+"/"+config.get("db:dbsessions"));
+var dbnedb=require(__dirname+"/lib/dbnedb.js").dbnedb(Datastore,__dirname+"/"+config.get("db:dbusers"),__dirname+"/"+config.get("db:dbusersStat"),__dirname+"/"+config.get("db:dbsessions"),__dirname+"/"+config.get("db:dbchat"),__dirname+"/"+config.get("db:dbgame"),__dirname+"/"+config.get("db:dbsystem"));
 var server=require(__dirname+"/lib/server.js").server(express,http,io,socketcookieParser,bodyParser,favicon,logger,session,passport,LocalStrategy,RememberMeStrategy,config,cookieParser,device);
 
 exports.fs=fs;

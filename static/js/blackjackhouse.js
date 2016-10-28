@@ -29,47 +29,15 @@ $(document).ready(function() {
 		chatElement.on("click",function(event){
 		  $(".control-panel-chat-main").slideToggle("slow");
 		});
-		
-		
-		function subscribe(){
-			var xhrsubscribe=new XMLHttpRequest();
-			xhrsubscribe.timeout = 1000*60*60*6;
-			xhrsubscribe.open("POST", "/chatSubscribe", true);
-			xhrsubscribe.setRequestHeader('Content-Type', 'application/json');
-			xhrsubscribe.send(JSON.stringify({from:currentPlace}));
-			xhrsubscribe.onreadystatechange = function() {
-				if (this.readyState != 4) {
-					return;
-				}
-				if(xhrsubscribe.responseText){
-					var reciveMessage=JSON.parse(xhrsubscribe.responseText);
-					messageField.append("<div class='control-panel-chat-message-newpost'><span>"+reciveMessage.user+"</span>:"+reciveMessage.message+"</div>");
-					messageAlert();
-					messageField.stop().animate({
-					  scrollTop: messageField[0].scrollHeight
-					}, 800);
-				}
-				// subscribe();
-			}
-		}
-		// subscribe();
+		socket.on("chat", function(user,msg){
+			messageField.append("<div class='control-panel-chat-message-newpost'><span>"+user+"</span>:"+msg+"</div>");
+		});
 
 		$("#publish").on("submit", function (event) {
 			event.preventDefault();
 			var messageInputField = $(this).find("[name=message]");
 			var sendMessage=messageInputField.val();
-			var xhrpublish=new XMLHttpRequest();
-			xhrpublish.open("POST", "/chatPublish", true);
-			xhrpublish.setRequestHeader('Content-Type', 'application/json');
-			if(sendMessage[0]=="["){
-				sendMessage=sendMessage.substr(1);
-				xhrpublish.send(JSON.stringify({from:currentPlace,toUser:sendMessage.split("]")[0],message:sendMessage.split("]")[1]}));
-				messageField.append("<div class='control-panel-chat-message-newpost'><span>"+username+"</span> to <span>"+sendMessage.split("]")[0]+"</span>:"+sendMessage.split("]")[1]+"</div>");
-			}
-			else{
-				xhrpublish.send(JSON.stringify({from:currentPlace,toUser:"#all",message:sendMessage}));
-			}
-			messageInputField.val("");
+			socket.emit('chat',sendMessage);
 		});
 
 		function messageAlert() {
