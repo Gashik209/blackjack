@@ -20,17 +20,14 @@ $(document).ready(function() {
 		var chatAlertInterval;
 		var chatElement=$(".control-panel-chat-hidePanel span");
 		var messageField = $(".control-panel-chat-message");
-		var username=$(".user-name").text();
-		var currentPlace=$(".game-status-gametable").text();
-			if(currentPlace==""){
-				currentPlace="main";
-			}
 
 		chatElement.on("click",function(event){
 		  $(".control-panel-chat-main").slideToggle("slow");
 		});
 		socket.on("chat", function(user,msg){
-			messageField.append("<div class='control-panel-chat-message-newpost'><span>"+user+"</span>:"+msg+"</div>");
+			messageField.append("<div class='control-panel-chat-message-newpost'><span class='control-panel-chat-message-newpost-user'>"+user+":</span><span class='control-panel-chat-message-newpost-msg'>"+msg+"</span></div>");
+			if(user!=$(".user-name").text())
+				messageAlert();
 		});
 
 		$("#publish").on("submit", function (event) {
@@ -38,6 +35,7 @@ $(document).ready(function() {
 			var messageInputField = $(this).find("[name=message]");
 			var sendMessage=messageInputField.val();
 			socket.emit('chat',sendMessage);
+			messageInputField.val("");
 		});
 
 		function messageAlert() {
@@ -137,12 +135,12 @@ $(document).ready(function() {
 		form.on("submit",function(event){
 			event.preventDefault();
 			$(this).find("input").each(function(){
-				if($(this)+"[name=Login]"||$(this)+"[name=email]"){
-					return;
-				}
-				else{
+				// if($(this)+"[name=Login]"||$(this)+"[name=email]"){
+				// 	return;
+				// }
+				// else{
 					switchFieldValidity($(this));
-				}
+				// }
 			});
 			if($("input.error").length<1){
 				ajaxLoginCheck(true);
