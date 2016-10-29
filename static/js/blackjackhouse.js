@@ -16,6 +16,16 @@ $(document).ready(function() {
 		window.onresize = resize;
 	})();
 
+	;(function(){//-----------------Profile
+		$("li").on("click",function(){
+			var currentItem=$(this);
+			$("li").removeClass("active");
+			currentItem.addClass("active");
+			$(".profile-user-container-tab").removeClass("active");
+			$(".profile-user-container-tab."+currentItem.data("tab")).addClass("active");
+		});
+	})();
+
 	;(function() {//-----------------CHAT
 		var chatAlertInterval;
 		var chatElement=$(".control-panel-chat-hidePanel span");

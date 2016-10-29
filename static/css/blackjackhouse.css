@@ -766,6 +766,7 @@ body.black-jack-game .control-panel-button-split:hover {
 	border:0.15rem solid red;
 	cursor:pointer;
 }
+/*-------------profile----------*/
 body.profile .main-profile {
 	position: relative;
     min-height: 38rem;
@@ -773,7 +774,7 @@ body.profile .main-profile {
     margin: 0;
     margin-left: auto;
     margin-right: auto;
-    margin-top:5rem;
+    margin-top:3rem;
 }
 body.profile .main-profile .profile-user-avatar{
 	display: inline-block;
@@ -789,25 +790,118 @@ body.profile .main-profile .profile-user-avatar img{
 	height: 10rem;
 }
 body.profile .main-profile .profile-user-statistic{
+	position: absolute;
 	padding: 0rem;
 	display: inline-block;
-	margin-left: 1rem;
+	margin-left: 7rem;
+	padding-top: 1rem;
 	height: 10rem;
 	width: 37rem;
-/*	background: blue;*/
 	font-size: 2rem;
 	line-height: 0.3rem;
 	color:white;
 }
 body.profile .main-profile .profile-user-container{
+	/*border: 0.2rem solid #800000;*/
 	margin-top: 1rem;
-	height: 20rem;
+	min-height: 20rem;
 	font-size: 2rem;
 	line-height: 0.3rem;
 	color:white;
 	/*background: green;*/
 }
-
+body.profile .profile-user-container .profile-user-container-tabs{
+	/*border-bottom: 0.2rem solid #800000;*/
+}
+body.profile .profile-user-container .profile-user-container-tabs ul{
+	margin-top: 0rem;
+	margin-bottom: 0rem;
+	padding-left: 0rem;
+}
+body.profile .profile-user-container .profile-user-container-tabs li{
+	text-align: center;
+	line-height: 2rem;
+	display: inline-block;
+	height: 4rem;
+	width: 7.65rem;
+	font-size: 2rem;
+}
+body.profile .profile-user-container .profile-user-container-tabs li.active{
+	color: red;
+}
+body.profile .profile-user-container .profile-user-container-tabs li:hover{
+	cursor: pointer;
+	color: red;
+}
+body.profile .profile-user-container .profile-user-container-tab{
+	padding-top: 1rem;
+	display: none;
+}
+body.profile .profile-user-container .profile-user-container-tab.active{
+	display: block;
+}
+body.profile .profile-user-container .profile-user-container-tab.stat{
+	padding-left: 0rem;
+	height: 21rem;
+}
+body.profile .profile-user-container .profile-user-container-statistic{
+	padding-left: 18rem;
+}
+body.profile .profile-user-container .profile-user-container-tab form{
+	margin:0;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:7%;
+	width:100%;
+	text-align:center;
+}
+body.profile .profile-user-container .profile-user-container-tab form span{
+	color: white;
+	font-size:1rem;
+	line-height:1rem;
+}
+body.profile .profile-user-container .profile-user-container-tab form input{
+	margin-top:0.3rem;
+	margin-bottom:1rem;
+	background-image:linear-gradient(#fcfcfc, #eee);
+	border:0.1rem solid #d5d5d5;
+	border-radius:0.3rem;
+	font-size: 1rem;
+	font-weight:bold;
+	text-align:center;
+	color:#5F5F5F;
+    -webkit-transition: background 1000ms linear;
+    -moz-transition: background 1000ms linear;
+    -o-transition: background 1000ms linear;
+    -ms-transition: background 1000ms linear;
+    transition: background 1000ms linear;
+}
+body.profile .profile-user-container .profile-user-container-tab form input:hover{
+	background:#d5d5d5;
+	cursor:pointer;
+}
+body.profile .profile-user-container .profile-user-container-tab form span+br+input.error  {
+	color:#8B0000;
+    background: #F08080;
+}
+body.profile .profile-user-container .profile-user-container-tab form span+br+input.error:-moz-placeholder {
+	color: #8B0000;
+}
+body.profile .profile-user-container .profile-user-container-tab form span+br+input.error::-webkit-input-placeholder {
+ 	color: #8B0000;
+}
+body.profile .profile-user-container .profile-user-container-tab form .form-button {
+	color:black;
+	margin-top:1rem;
+}
+body.profile .profile-user-container .profile-user-container-tab form span.error  {
+	color:#8B0000;
+    -webkit-animation-name: example;
+    -webkit-animation-duration: 2s;
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
 
 
 /* Chrome, Safari, Opera */
