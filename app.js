@@ -8,7 +8,7 @@ var RememberMeStrategy = require('passport-remember-me').Strategy;
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var fs = require('fs');
-// var multer = require('multer');//for upload files
+var multer = require('multer');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var Datastore = require('nedb');
@@ -19,7 +19,7 @@ var cookieParser=require("cookie-parser");
 var device = require('express-device');
 
 var dbnedb=require(__dirname+"/lib/dbnedb.js").dbnedb(Datastore,__dirname+"/"+config.get("db:dbusers"),__dirname+"/"+config.get("db:dbusersStat"),__dirname+"/"+config.get("db:dbsessions"),__dirname+"/"+config.get("db:dbchat"),__dirname+"/"+config.get("db:dbgame"),__dirname+"/"+config.get("db:dbsystem"));
-var server=require(__dirname+"/lib/server.js").server(express,http,io,socketcookieParser,bodyParser,favicon,logger,session,passport,LocalStrategy,RememberMeStrategy,config,cookieParser,device);
+var server=require(__dirname+"/lib/server.js").server(express,http,io,socketcookieParser,bodyParser,favicon,logger,session,passport,LocalStrategy,RememberMeStrategy,config,cookieParser,device,multer);
 
 exports.fs=fs;
 exports.ejs=ejs;

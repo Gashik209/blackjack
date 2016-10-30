@@ -28,7 +28,7 @@
 	"after_round_delay":3000,
 	"players_max_card_limit":5,
 	"dealer_turn_delay":700,
-	"chat_log":true,
-	"game_log":true,
+	"chat_log":false,
+	"game_log":false,
 	"system_log":true
 }

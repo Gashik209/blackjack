@@ -23,7 +23,155 @@ $(document).ready(function() {
 			currentItem.addClass("active");
 			$(".profile-user-container-tab").removeClass("active");
 			$(".profile-user-container-tab."+currentItem.data("tab")).addClass("active");
+			var form=$(".profile-user-container-tab.active form");
+			if(form!=undefined){
+				form.on("submit",function(event){
+					event.preventDefault();
+					$(this).find("input").each(function(){
+						switchFieldValidity($(this));
+					});
+					if($("input.error").length<1){
+						switch(form.attr("id")){
+							case "change-passwd":ajaxChangePassword(form);
+								break;
+							case "change-secret":ajaxChangeSecret(form);
+								break;
+							case "change-email":ajaxChangeEmail(form);
+								break;
+							case "remove-account":ajaxRemoveAcc(form);
+						}
+					};
+				});
+				form.find("input").on("blur", function(){
+					switchFieldValidity($(this));
+				});
+				form.find("input").on("focus",function(){
+					var currentField=$(this);
+					if(currentField.attr("name")=="Password"){
+						form.children().show("slow");
+					}
+					if(currentField.hasClass("error")){
+						inputCorrect(currentField);
+					}
+				});
+				function switchFieldValidity(currentField){
+					switch(currentField.attr("name")){
+						case "email":checkMailValidity(currentField);
+							break;
+						case "Password":checkPasswdValidity(currentField);
+							break;
+						case "confirmPassword":checkPasswdConfirmValidity(currentField,form.find("input[name=Password]"));
+							break;
+						case "secretWord":checkSecretWordValidity(currentField);
+					}	
+				}
+				function checkPasswdValidity(passwd){
+					var currentVal=passwd.val();
+					if ((currentVal.match(/[а-яa-z]{1,}/)===null)||(currentVal.match(/[А-ЯA-Z]{1,}/)===null)||(currentVal.match(/[0-9]{1,}/)===null)||(currentVal.match(/^.{4,16}$/g)===null)) {
+						inputError(passwd,"Пароль должен содержать от 4х до 16ти символов в различном регистре и цифры");
+					}
+				}
+				function checkPasswdConfirmValidity(passwd1,passwd2){
+					if (passwd1.val()!=passwd2.val()) {
+						inputError(passwd1,"Пароли не совпадают");
+					}
+				}
+				function checkMailValidity(email){
+					if (email.val().match(/^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i)===null) {
+						inputError(email,"Такой e-mail не допускается");
+					}
+				}
+				function checkSecretWordValidity(secret){
+					if (secret.val().match(/^\w{1,}$/g)===null) {
+						inputError(secret,"Слово может содержать только буквы латинского алфавита (a–z), цифры и '_'");
+					}
+				}
+			}
+
 		});
+	function inputError(field,errText){
+		field.addClass("error");
+		var inputSpan=field.prev().prev();
+		inputSpan.addClass("error");
+		inputSpan.val(inputSpan.text());
+		inputSpan.text(errText);
+	}
+	function inputCorrect(field){
+		field.removeClass("error");
+		var inputSpan=field.prev().prev();
+		inputSpan.removeClass("error");
+		inputSpan.text(inputSpan.val());
+		inputSpan.val("");
+	}
+	function ajaxChangePassword(form){
+			$.ajax({
+				url: "/register",
+				method: "POST",
+				contentType:"application/json; charset=utf-8",
+				data: JSON.stringify({query:"changePasswd",
+									secret:$(form).find("input[name=secretWord]").val(),
+									password:$(form).find("input[name=Password]").val()}),
+				dataType: "text",
+			    success: function(response) {
+			    	if(response=="false")
+			    		return inputError($(form).find("input[name=secretWord]"), "Не верно указано секретное слово");
+			    	location.reload();
+			    }
+			});
+	}
+	function ajaxChangeSecret(form){
+			$.ajax({
+				url: "/register",
+				method: "POST",
+				contentType:"application/json; charset=utf-8",
+				data: JSON.stringify({query:"changeSecret",
+									secret:$(form).find("input[name=secretWord]").val(),
+									password:$(form).find("input[name=Password]").val()}),
+				dataType: "text",
+			    success: function(response) {
+			    	if(response=="false")
+			    		return inputError($(form).find("input[name=Password]"), "Не верно введен пароль");
+			    	location.reload();
+			    }
+			});
+	}
+	function ajaxChangeEmail(form){
+			$.ajax({
+				url: "/register",
+				method: "POST",
+				contentType:"application/json; charset=utf-8",
+				data: JSON.stringify({query:"changeEmail",
+									email:$(form).find("input[name=email]").val(),
+									password:$(form).find("input[name=Password]").val()}),
+				dataType: "text",
+			    success: function(response) {
+			    	if(response=="exist")
+			    		return inputError($(form).find("input[name=email]"), "Такой email уже зарегистрирован");
+			    	if(response=="false")
+			    		return inputError($(form).find("input[name=Password]"), "Не верно введен пароль");
+			    	location.reload();
+			    }
+			});
+	}
+	function ajaxRemoveAcc(form){
+			$.ajax({
+				url: "/register",
+				method: "POST",
+				contentType:"application/json; charset=utf-8",
+				data: JSON.stringify({query:"removeAccount",
+									secret:$(form).find("input[name=secretWord]").val(),
+									password:$(form).find("input[name=Password]").val()}),
+				dataType: "text",
+			    success: function(response) {
+			    	if(response=="passfalse")
+			    		return inputError($(form).find("input[name=Password]"), "Не верно введен пароль");
+			    	if(response=="secretfalse")
+			    		return inputError($(form).find("input[name=secretWord]"), "Не верно указано секретное слово");
+			    	location.reload();
+			    }
+			});
+	}
+		
 	})();
 
 	;(function() {//-----------------CHAT

@@ -20,7 +20,7 @@ exports.profile=function(sessionID) {
 		regdate=regdate.getDate()+"/"+parseInt(1+regdate.getMonth())+"/"+regdate.getFullYear();
 		return app.ejs.render(contentView, {
 			login:users_sessions.autorizedUsers[sessionID].login,
-			avatar:"static/img/avatars/"+result.avatar,
+			avatar:"static/img/avatars/"+users_sessions.autorizedUsers[sessionID].avatar,
 			bank:result.bank,
 			regDate:regdate,
 			played:result.played,
