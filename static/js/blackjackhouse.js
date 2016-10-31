@@ -17,7 +17,7 @@ $(document).ready(function() {
 	})();
 
 	;(function(){//-----------------Restore pswd
-
+		var formSet=$("#restorepswd_set");
 		var form=$("#restorepswd");
 		form.on("submit",function(event){
 			event.preventDefault();
@@ -44,10 +44,38 @@ $(document).ready(function() {
 				});
 			};
 		});
+		formSet.on("submit",function(event){
+			event.preventDefault();
+			$(this).find("input").each(function(){
+				switchFieldValidity($(this));
+			});
+			if($("input.error").length<1){
+				$.ajax({
+					url: "/register",
+					method: "POST",
+					contentType:"application/json; charset=utf-8",
+					data: JSON.stringify({query:"restorepswdch",
+										password:$(formSet).find("input[name=Password]").val()}),
+					dataType: "text",
+				    success: function(response) {
+				    	location.href = response;
+				    }
+				});
+			};
+		});
 		form.find("input").on("blur", function(){
 			switchFieldValidity($(this));
 		});
 		form.find("input").on("focus",function(){
+			var currentField=$(this);
+			if(currentField.hasClass("error")){
+				inputCorrect(currentField);
+			}
+		});
+		formSet.find("input").on("blur", function(){
+			switchFieldValidity($(this));
+		});
+		formSet.find("input").on("focus",function(){
 			var currentField=$(this);
 			if(currentField.hasClass("error")){
 				inputCorrect(currentField);
@@ -75,6 +103,10 @@ $(document).ready(function() {
 				switch(currentField.attr("name")){
 					case "Login":checkLoginValidity(currentField);
 						break;
+					case "Password":checkPasswdValidity(currentField);
+						break;
+					case "confirmPassword":checkPasswdConfirmValidity(currentField,formSet.find("input[name=Password]"));
+						break;
 					case "email":checkMailValidity(currentField);
 						break;
 					case "secretWord":checkSecretWordValidity(currentField);
@@ -93,6 +125,17 @@ $(document).ready(function() {
 			}
 			else{
 				ajaxLoginCheck();
+			}
+		}
+		function checkPasswdValidity(passwd){
+			var currentVal=passwd.val();
+			if ((currentVal.match(/[а-яa-z]{1,}/)===null)||(currentVal.match(/[А-ЯA-Z]{1,}/)===null)||(currentVal.match(/[0-9]{1,}/)===null)||(currentVal.match(/^.{4,16}$/g)===null)) {
+				inputError(passwd,"Пароль должен содержать от 4х до 16ти символов в различном регистре и цифры");
+			}
+		}
+		function checkPasswdConfirmValidity(passwd1,passwd2){
+			if (passwd1.val()!=passwd2.val()) {
+				inputError(passwd1,"Пароли не совпадают");
 			}
 		}
 		function checkMailValidity(email){
