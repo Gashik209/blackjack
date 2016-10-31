@@ -120,3 +120,9 @@ exports.game=function(table) {
 	var contentView=app.fs.readFileSync(__dirname+'/content/game.ejs', 'utf-8');
 	return app.ejs.render(contentView, {tableNum:table.tableNum,tableMinBet:table.tableMinBet,tableMaxBet:table.tableMaxBet});
 }
+exports.restorepswd=function(isauth,sessionID) {
+	if(!isauth&&users_sessions.autorizedUsers[sessionID].restorepswd==undefined)
+		return app.fs.readFileSync(__dirname+'/content/restorepswd.ejs', 'utf-8');
+	if(!isauth&&users_sessions.autorizedUsers[sessionID].restorepswd)
+		return app.fs.readFileSync(__dirname+'/content/restorepswd_set.ejs', 'utf-8');
+}

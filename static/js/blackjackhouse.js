@@ -16,6 +16,110 @@ $(document).ready(function() {
 		window.onresize = resize;
 	})();
 
+	;(function(){//-----------------Restore pswd
+
+		var form=$("#restorepswd");
+		form.on("submit",function(event){
+			event.preventDefault();
+			$(this).find("input").each(function(){
+				switchFieldValidity($(this));
+			});
+			if($("input.error").length<1){
+				$.ajax({
+					url: "/register",
+					method: "POST",
+					contentType:"application/json; charset=utf-8",
+					data: JSON.stringify({query:"restorepswd",
+										email:$(form).find("input[name=email]").val(),
+										secret:$(form).find("input[name=secretWord]").val(),
+										username:$(form).find("input[name=Login]").val()}),
+					dataType: "text",
+				    success: function(response) {
+				    	if(response=="secretfalse")
+				    		return inputError($(form).find("input[name=secretWord]"), "Не верно указано секретное слово");
+				    	if(response=="emailfalse")
+				    		return inputError($(form).find("input[name=email]"), "Не верно указан email");
+				    	location.reload();
+				    }
+				});
+			};
+		});
+		form.find("input").on("blur", function(){
+			switchFieldValidity($(this));
+		});
+		form.find("input").on("focus",function(){
+			var currentField=$(this);
+			if(currentField.hasClass("error")){
+				inputCorrect(currentField);
+			}
+		});
+		function ajaxLoginCheck(){
+			var loginField=form.find("input[name=Login]");
+			$.ajax({
+				url: "/register",
+				method: "POST",
+				contentType:"application/json; charset=utf-8",
+				data: JSON.stringify({query:"checkLogin",username:loginField.val()}),
+				dataType: "text",
+			    success: function(response) {
+			    	if(response=="false"){
+			    		inputError(loginField, "Такой логин не зарегистрирован");
+			    	}
+			    },
+				error: function(response) {
+					inputError(loginField, "Сбой соединения... попробуйте позже");
+				}
+			});
+		}
+		function switchFieldValidity(currentField){
+				switch(currentField.attr("name")){
+					case "Login":checkLoginValidity(currentField);
+						break;
+					case "email":checkMailValidity(currentField);
+						break;
+					case "secretWord":checkSecretWordValidity(currentField);
+				}	
+		}
+
+		function checkLoginValidity(login){
+			if (login.val().match(/^\w{1,}$/g)===null) {
+				inputError(login, "Логин может содержать только буквы латинского алфавита (a–z), '_' и цифры");			
+			}
+			else if(login.val().match(/^.{4,16}$/g)===null){
+				inputError(login, "Логин должен содержать от 4х до 16ти символов");
+			}
+			else if(!login.val().match(/^[A-z]/)){
+				inputError(login, "Логин должен начинаться с буквы");
+			}
+			else{
+				ajaxLoginCheck();
+			}
+		}
+		function checkMailValidity(email){
+			if (email.val().match(/^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i)===null) {
+				inputError(email,"Такой e-mail не допускается");
+			}
+		}
+		function checkSecretWordValidity(secret){
+			if (secret.val().match(/^\w{1,}$/g)===null) {
+				inputError(secret,"Слово может содержать только буквы латинского алфавита (a–z), цифры и '_'");
+			}
+		}
+		function inputError(field,errText){
+			field.addClass("error");
+			var inputSpan=field.prev().prev();
+			inputSpan.addClass("error");
+			inputSpan.val(inputSpan.text());
+			inputSpan.text(errText);
+		}
+		function inputCorrect(field){
+			field.removeClass("error");
+			var inputSpan=field.prev().prev();
+			inputSpan.removeClass("error");
+			inputSpan.text(inputSpan.val());
+			inputSpan.val("");
+		}
+	})();	
 	;(function(){//-----------------Profile
 		$("li").on("click",function(){
 			var currentItem=$(this);
@@ -47,9 +151,6 @@ $(document).ready(function() {
 				});
 				form.find("input").on("focus",function(){
 					var currentField=$(this);
-					if(currentField.attr("name")=="Password"){
-						form.children().show("slow");
-					}
 					if(currentField.hasClass("error")){
 						inputCorrect(currentField);
 					}
@@ -384,7 +485,7 @@ $(document).ready(function() {
 		}
 	})();
 
-	;(function(){//----------------------------signUp
+	;(function(){//----------------------------signIn
 
 		var form=$("#mainForm");
 
