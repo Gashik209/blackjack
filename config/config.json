@@ -10,7 +10,8 @@
 	},
 	"admin_account":{
 		"login":"admin",
-		"password":"admin"
+		"password":"admin",
+		"admin_login_page":"adminka"
 	},
 	"tables_on_server_start":{
 		"enable":true,
