@@ -611,11 +611,14 @@ $(document).ready(function() {
 		$("[name=min-bet]").on("click", function() {
 			var minBetLimit=$(this).attr("id").split("-")[2];
 			$("[name=max-bet]").each(function(){
-				if($(this).attr("id").split("-")[2]<minBetLimit)
-					console.log(minBetLimit);
-			})
-			
-			// .attr('disabled',true)
+				if(+$(this).attr("id").split("-")[2]<=+minBetLimit){
+					$(this).prop('disabled', true);
+					$(this).next().next().prop('checked', true);
+				}
+				else{
+					$(this).prop('disabled', false);
+				}
+			});
 		});
 		$("#newTable").on("click", function(){
 			var data={};
@@ -623,10 +626,9 @@ $(document).ready(function() {
 			data.minBet=betsLimit.eq(0).attr("id").split("-")[2];
 			data.maxBet=betsLimit.eq(1).attr("id").split("-")[2];
 			socket.emit('addNewTable',data);
+			location.reload();
 		});
-		socket.on('addNewTable', function(data){
-		  location.reload();
-		});
+
 	})();
 
 	;(function(){//----------------------------Admin_signIn

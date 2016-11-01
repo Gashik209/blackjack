@@ -436,6 +436,51 @@ body.chooseGame .game-table-status {
 body.chooseGame .game-table-status {
 	font-size:1rem;
 }
+body.chooseGame .create-new-table{
+	background-image: url(../img/ChatHide.jpg);
+	background-size:100% 100%;
+	height: 1.85rem;
+	border-radius:2%;
+	border:0.1rem solid red;
+	color: white;
+}
+body.chooseGame .create-new-table .create-new-table-min{
+	position: absolute;
+	left: 1rem;
+	top:0.4rem;
+}
+body.chooseGame .create-new-table .create-new-table-max{
+	position: absolute;
+	right: 1rem;
+	top:0.4rem;
+}
+body.chooseGame .create-new-table input{
+	cursor: pointer;
+    height: 0.75rem;
+    width: 0.75rem;
+}
+body.chooseGame .create-new-table input{
+
+}
+body.chooseGame #newTable{
+	background-image: url(../img/buttonNewTable.gif);
+	cursor: pointer;
+	background-size:100% 100%;
+	border: 0.1rem solid black;
+	border-radius:5%;
+	width:5rem;
+	height:1.8rem;
+	vertical-align:-0.4rem;
+}
+body.chooseGame #newTable:hover{
+	background-image: url(../img/buttonNewTableHover.gif);
+	cursor: pointer;
+	border: 0.1rem solid red;
+	border-radius:5%;
+	width:5rem;
+	height:1.8rem;
+	background-size:100% 100%;
+}
 /*-----game------------*/
 body.black-jack-game span {
 	font-size: 0.5rem;color:#fcfcfc;
