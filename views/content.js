@@ -1,6 +1,8 @@
 var users_sessions=require(__dirname+"/../lib/users_sessions.js");
 var app=require(__dirname+"/../app.js")
+var config=require(__dirname+"/../config");
 var game=require(__dirname+"/../lib/game.js")
+var dbnedb=require(__dirname+"/../lib/dbnedb.js")
 var parts=require(__dirname+"/parts.js");
 exports.err404=function() {
 	return app.fs.readFileSync(__dirname+'/content/err404.ejs', 'utf-8');
@@ -9,7 +11,32 @@ exports.err500=function() {
 	return app.fs.readFileSync(__dirname+'/content/err500.ejs', 'utf-8');
 }
 exports.main=function() {
-	return app.fs.readFileSync(__dirname+'/content/main.ejs', 'utf-8');
+	return new Promise(function (resolvemain,reject) {
+		var contentView=app.fs.readFileSync(__dirname+'/content/main.ejs', 'utf-8');
+		var playersStats=[];
+		var promise=new Promise(function (resolve,reject) {
+	  		dbnedb.db.usersStat.find({}).sort({bank:-1}).limit(config.get("top_rating")).exec(function (err,docs) {
+	  			if(docs.length==0)
+	  				resolvemain(app.ejs.render(contentView, {rating:"You can be the first"}));
+	  			docs.forEach(function(item,i,arr){
+	  				dbnedb.db.users.findOne({_id:item.userId},
+					    function(err,data) {
+					    	playersStats.push({login:data.username,bank:item.bank});
+					    	if(i==arr.length-1)
+					    		resolve(playersStats);
+					    });
+		  		});
+		  	});
+		});
+		promise.then(function(result){
+		  		var playersRating="";
+		  		result.forEach(function(item,i,arr){
+		  			playersRating+="<b>"+item.login+"</b><span>:</span><span>"+item.bank+"</span></br>";
+		  			if(i==arr.length-1)
+		  				resolvemain(app.ejs.render(contentView, {rating:playersRating}));
+		  		});
+		  	});
+	});
 }
 exports.profile=function(sessionID) {
 	var page;

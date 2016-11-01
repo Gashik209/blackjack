@@ -24,6 +24,7 @@
 		"min":150,
 		"max":1000
 	},
+	"top_rating":10,
 	"session_secret":"WeDontNeedNoEducation",
 	"remember_me_duration":10,
 	"card_deck_quantity":2,
