@@ -459,9 +459,6 @@ body.chooseGame .create-new-table input{
     height: 0.75rem;
     width: 0.75rem;
 }
-body.chooseGame .create-new-table input{
-
-}
 body.chooseGame #newTable{
 	background-image: url(../img/buttonNewTable.gif);
 	cursor: pointer;
@@ -471,6 +468,7 @@ body.chooseGame #newTable{
 	width:5rem;
 	height:1.8rem;
 	vertical-align:-0.4rem;
+	margin-top: 0.05rem;
 }
 body.chooseGame #newTable:hover{
 	background-image: url(../img/buttonNewTableHover.gif);
