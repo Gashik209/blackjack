@@ -1,20 +1,21 @@
 "use strict"
 var socket = io.connect();
 $(document).ready(function() {
-	;(function(){
-		resize();
-		function resize() {//--------------Resize
-			var width=document.body.clientWidth/1050;
-			var height=document.documentElement.clientHeight/750;
-			if(width<height){
-				$('html').css({"font-size":""+(width)*100+"%"});
-			}
-			else{
-				$('html').css({"font-size":""+(height)*100+"%"});
-			}
-		}
-		window.onresize = resize;
-	})();
+
+
+	// ;(function(){
+	// 	function resize() {//--------------Resize
+	// 		var width=document.body.clientWidth/1050;
+	// 		var height=document.documentElement.clientHeight/750;
+	// 		if(width<height){
+	// 			$('html').css({"font-size":""+(width)*100+"%"});
+	// 		}
+	// 		else{
+	// 			$('html').css({"font-size":""+(height)*100+"%"});
+	// 		}
+	// 	}
+	// 	window.onresize = resize;
+	// })();
 
 	;(function(){//-----------------Restore pswd
 		var formSet=$("#restorepswd_set");
@@ -173,6 +174,7 @@ $(document).ready(function() {
 			var form=$(".profile-user-container-tab.active form");
 			if(form!=undefined){
 				form.on("submit",function(event){
+					console.log(form);
 					event.preventDefault();
 					$(this).find("input").each(function(){
 						switchFieldValidity($(this));
