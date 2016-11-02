@@ -6,6 +6,24 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 	<script src="socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="static/js/blackjackhouse.js"></script>
+	<script type="text/javascript">
+		;(function(){
+			resize();
+			function resize() {//--------------Resize
+				var width=document.documentElement.clientWidth/1050;
+				var height=document.documentElement.clientHeight/750;
+				if(width<height){
+					$('html').css({"font-size":""+(width)*100+"%"});
+				}
+				else{
+					$('html').css({"font-size":""+(height)*100+"%"});
+				}
+			}
+			$(document).ready(function() {
+				window.onresize = resize;
+			});
+		})();
+	</script>
 </head>
 <%-header%>
 <%-content%>
