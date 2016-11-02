@@ -171,6 +171,8 @@ $(document).ready(function() {
 							case "change-email":ajaxChangeEmail(form);
 								break;
 							case "remove-account":ajaxRemoveAcc(form);
+								break;
+							case "upload-avatar":form[0].submit();
 						}
 					};
 				});
@@ -313,6 +315,9 @@ $(document).ready(function() {
 		});
 		socket.on("chat", function(user,msg){
 			messageField.append("<div class='control-panel-chat-message-newpost'><span class='control-panel-chat-message-newpost-user'>"+user+":</span><span class='control-panel-chat-message-newpost-msg'>"+msg+"</span></div>");
+			$(".control-panel-chat-message-newpost-user").on("click",function(){
+				$(".control-panel-chat-input-text").val("private["+$(this).text().split(":")[0]+"]");
+			});
 			if(user!=$(".user-name").text())
 				messageAlert();
 		});
@@ -648,6 +653,7 @@ $(document).ready(function() {
 
 	;(function(){//----------------game-------------------------------------------------------
 		//---------------------Join To Table------Recive info about players--------------------
+		var timeout;
 		socket.on('tableInfo', function(players){
 			for(var key in players) {
 				var selectPlace=$("#player"+key+".place");
@@ -665,6 +671,20 @@ $(document).ready(function() {
 				}
 			}
 		});
+		socket.on('playerInfo', function(userInfo){
+			$(".control-panel").prepend("<div class='player-info'>Login:<span class='player-info-login'>"+userInfo.login+"</span><button id='private-message'>Private Message</button><br/>Bank:<span class='player-info-bank'>"+userInfo.bank+"</span> Games Played:<span>"+userInfo.played+"</span>Wins:<span class='player-info-win'>"+userInfo.percWin+"%</span>");
+			timeout = setTimeout(function(){
+				$(".player-info").fadeOut("slow").remove();
+			}, 7000);
+			$("#private-message").on("click",function(){
+				$(".control-panel-chat-input-text").val("private["+$(".player-info-login").text()+"]");
+				var chatElement=$(".control-panel-chat-main");
+				if(!chatElement.is(':visible')){
+					chatElement.slideToggle("slow");
+				}
+			});
+		});
+				//--------------------Send Private------------------------- 
 
 		socket.on("betsStage", function(usersBank){
 			var playerLogin=$(".user-name").text();
@@ -818,12 +838,12 @@ $(document).ready(function() {
 		  else{
 		//--------------------PLAYER INFO-------------------------  
 			$(".player-info").remove();
-			$(".control-panel").prepend("<div class='player-info'>Bank:<span class='player-info-bank'>1000</span> win:<span class='player-info-win'>50%</span></br>register:<span class='player-info-win'>10.12.15</span><br></div>");
+			clearTimeout(timeout);
+			socket.emit('playerInfo',place.attr("id").substr(6,1));
 		  }
 		});
 		
 		// $(".place").on("mouseenter",(function(){}));
-
 		//--------------------INIT CARD----------------------------------
 		function initCards(suit,rank,player){
 		  var playerCardField=$(".game-field-cards").find(".cards-player"+player);
