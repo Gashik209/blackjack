@@ -316,7 +316,7 @@ $(document).ready(function() {
 		socket.on("chat", function(user,msg){
 			messageField.append("<div class='control-panel-chat-message-newpost'><span class='control-panel-chat-message-newpost-user'>"+user+":</span><span class='control-panel-chat-message-newpost-msg'>"+msg+"</span></div>");
 			$(".control-panel-chat-message-newpost-user").on("click",function(){
-				$(".control-panel-chat-input-text").val("private["+$(this).text().split(":")[0]+"]");
+				$(".control-panel-chat-input-text").val("private["+$(this).text().split(":")[0]+"]").focus();
 			});
 			if(user!=$(".user-name").text())
 				messageAlert();
@@ -653,7 +653,8 @@ $(document).ready(function() {
 
 	;(function(){//----------------game-------------------------------------------------------
 		//---------------------Join To Table------Recive info about players--------------------
-		var timeout;
+		var timeoutPlayerInfo,timeoutDealerInfo;
+		var dealerInfo=[];
 		socket.on('tableInfo', function(players){
 			for(var key in players) {
 				var selectPlace=$("#player"+key+".place");
@@ -673,15 +674,15 @@ $(document).ready(function() {
 		});
 		socket.on('playerInfo', function(userInfo){
 			$(".control-panel").prepend("<div class='player-info'>Login:<span class='player-info-login'>"+userInfo.login+"</span><button id='private-message'>Private Message</button><br/>Bank:<span class='player-info-bank'>"+userInfo.bank+"</span> Games Played:<span>"+userInfo.played+"</span>Wins:<span class='player-info-win'>"+userInfo.percWin+"%</span>");
-			timeout = setTimeout(function(){
+			timeoutPlayerInfo = setTimeout(function(){
 				$(".player-info").fadeOut("slow").remove();
 			}, 7000);
-			$("#private-message").on("click",function(){
-				$(".control-panel-chat-input-text").val("private["+$(".player-info-login").text()+"]");
+			$("#private-message").on("click",function(){				
 				var chatElement=$(".control-panel-chat-main");
 				if(!chatElement.is(':visible')){
 					chatElement.slideToggle("slow");
 				}
+				$(".control-panel-chat-input-text").val("private["+$(".player-info-login").text()+"]").focus();
 			});
 		});
 				//--------------------Send Private------------------------- 
@@ -744,8 +745,7 @@ $(document).ready(function() {
 			secondCard.removeClass("13_13").addClass(data.cardSuit+"_"+data.cardVal).css({"background":"url(static/img/Cards/"+data.cardSuit+"_"+data.cardVal+".png) no-repeat","background-size":"100% 100%"});
 		});
 
-		socket.on('initTradeRound', function(data,cardDeckNum){
-			console.log("card Deck № "+cardDeckNum);
+		socket.on('initTradeRound', function(data){
 			data.forEach(function(item,i,arr){
 				var place=$("#player"+item);
 				if(place.find(".place-player-name").text()==$(".user-name").text())
@@ -838,12 +838,29 @@ $(document).ready(function() {
 		  else{
 		//--------------------PLAYER INFO-------------------------  
 			$(".player-info").remove();
-			clearTimeout(timeout);
+			clearTimeout(timeoutPlayerInfo);
 			socket.emit('playerInfo',place.attr("id").substr(6,1));
 		  }
 		});
 		
 		// $(".place").on("mouseenter",(function(){}));
+		//--------------------Dealer info----------------------------------
+		socket.on('dealerInfo', function(infotext,duration){
+			var infoblock=$(".dealer_info_text");
+			dealerInfo.push(infotext);
+			function dealerInfoPrint(){
+				if(!dealerInfo.length||!infoblock.is(':empty'))
+					return;
+				infoblock.text(dealerInfo.splice(0,1)).fadeIn("slow");
+				timeoutDealerInfo=setTimeout(function(){
+					infoblock.fadeOut("slow",function(){
+						infoblock.text("");
+						dealerInfoPrint();
+					});
+				}, duration);
+			}
+			dealerInfoPrint();
+		});
 		//--------------------INIT CARD----------------------------------
 		function initCards(suit,rank,player){
 		  var playerCardField=$(".game-field-cards").find(".cards-player"+player);

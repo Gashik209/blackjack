@@ -606,6 +606,16 @@ body.black-jack-game #dealer.place_dealer .chair_dealer{
 	background-size:100%;
 	border-radius: 15% 15% 0% 0%;
 }
+body.black-jack-game #dealer.place_dealer .dealer_info{
+	position: absolute;
+	top:0.9rem;
+	left: 4.4rem;
+	width: 17rem;
+	height: 1.8rem;
+}
+body.black-jack-game #dealer.place_dealer .dealer_info_text{
+	font-size: 1.5rem;
+}
 body.black-jack-game .place.empty .chair{
 	background:url(../img/chair.jpg) no-repeat;
 	background-size:100%;

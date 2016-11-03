@@ -111,13 +111,14 @@ exports.administrate=function() {
 			content+=game.gameTables[key].dealer.cardScore;
 			content+="<br>";
 			content+="TableCardDecks:<br>";
-			for (var i=game.gameTables[key].cardDecks.length-1; i>=0; i--) {
+			for (var i=0; i<=game.gameTables[key].cardDecks.length-1; i++) {
+				content+="Deck "+(i+1)+": ";
 				for (var j=game.gameTables[key].cardDecks[i].length-1; j>=0; j--) {
 					content+=game.gameTables[key].cardDecks[i][j][0]+"."+game.gameTables[key].cardDecks[i][j][1]+";";
 				}
 				content+="<br>";
 			}
-			content+="activeDeck: "+game.gameTables[key].activeDeck+"<br>";
+			content+="activeDeck: "+(game.gameTables[key].activeDeck+1)+"<br>";
 			content+="<br>";
 		}
 	return content;
